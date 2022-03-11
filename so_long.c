@@ -6,52 +6,54 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/10 16:00:05 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/11 14:25:06 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct s_data
+typedef struct s_vars
 {
+	void	*mlx;
+	void	*win;
 	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+	char	*path;
+}				t_vars;
 
-void	ft_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	ft_hook_loop(void *data)
 {
-	char	*dst;
+	return (0);
+}
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+int	ft_key_print(int keycode, t_vars *vars)
+{
+	if (keycode == 53)
+		mlx_destroy_window(vars->mlx, vars->win);
+	printf("Working !\n%d\n", keycode);
+	return (0);
+}
+
+int	ft_mouse_print(int button, int x, int y, t_vars *vars)
+{
+	printf("Mouse Printing !\n%d\n", button);
+	return (0);
 }
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	int		x = 50;
-	int		y = 50;
-	t_data	img;
+	t_vars	vars;
+	int		img_x;
+	int		img_y;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello World");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	while (x < 156)
-	{
-		y = 50;
-		while (y < 156)
-		{
-			ft_mlx_pixel_put(&img, x, y, 0x00FF0000);
-			y++;
-		}
-		x++;
-	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	vars.path = "./file1.xpm";
+	vars.mlx = mlx_init();
+	vars.img = mlx_xpm_file_to_image(vars.mlx, vars.path, &img_x, &img_y);
+	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Window Test");
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 500, 500);
+	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
+	mlx_key_hook(vars.win, ft_key_print, &vars);
+	mlx_mouse_hook(vars.win, ft_mouse_print, &vars);
+	mlx_loop(vars.mlx);
 }
