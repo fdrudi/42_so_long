@@ -6,41 +6,16 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/11 20:03:33 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/12 18:15:21 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 #include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*path;
-}				t_vars;
-
-typedef struct s_win
-{
-	int		x;
-	int		y;
-	int		fd;
-	char	**bool;
-}				t_win;
 
 int	ft_hook_loop(void *data)
 {
-	return (0);
-}
-
-int	ft_key_print(int keycode, t_vars *vars)
-{
-	if (keycode == 53)
-		mlx_destroy_window(vars->mlx, vars->win);
-	printf("Working !\n%d\n", keycode);
 	return (0);
 }
 
@@ -50,22 +25,95 @@ int	ft_mouse_print(int button, int x, int y, t_vars *vars)
 	return (0);
 }
 
-int	ft_make_map(t_vars vars, t_win win_size, int img_x, int img_y)
+int	ft_strlen_y(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != 0)
+		i++;
+	return (i);
+}
+
+int	ft_move_pg(t_vars *vars, int y, int x)
+{
+	int	img_x;
+	int	img_y;
+
+	vars->path = "./sprites/floor.xpm";
+	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+
+	vars->pg_x += x;
+	vars->pg_y += y;
+	vars->path = "./sprites/player.xpm";
+	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	return (0);
+
+}
+
+int	ft_key_print(int keycode, t_vars *vars)
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
+	if (keycode == 13 && vars->map[vars->pg_y - 1][vars->pg_x] != '1')
+		ft_move_pg(vars, -1, 0);
+	if (keycode == 1 && vars->map[vars->pg_y + 1][vars->pg_x] != '1')
+		ft_move_pg(vars, 1, 0);
+	if (keycode == 0 && vars->map[vars->pg_y][vars->pg_x - 1] != '1')
+		ft_move_pg(vars, 0, -1);
+	if (keycode == 2 && vars->map[vars->pg_y][vars->pg_x + 1] != '1')
+		ft_move_pg(vars, 0, 1);
+	return (0);
+}
+
+int	ft_make_map(t_vars *vars, int *img_x, int *img_y)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i <= win_size.y)
+	while (i < vars->y)
 	{
 		j = 0;
-		while (j <= win_size.x)
+		while (j < vars->x)
 		{
-			if (win_size.bool[i][j] == 1)
+			if (vars->map[i][j] == '1')
 			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, vars.path, &img_x, &img_y);
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, i * 64, j * 64);
+				if ((vars->map[i][j - 1] != '1' && vars->map[i][j + 1] != '1' && j > 0 && j < vars->x - 1) || i == 0 || i == vars->y -1)
+				{
+					vars->path = "./sprites/wall3.xpm";
+					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
+					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
+				}
+				else
+				{
+					vars->path = "./sprites/wall4.xpm";
+					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
+					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
+				}
+			}
+			if (vars->map[i][j] == '0' || vars->map[i][j] == 'C' || vars->map[i][j] == 'N' || vars->map[i][j] == 'E')
+			{
+				vars->path = "./sprites/floor.xpm";
+				vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
+			}
+			if (vars->map[i][j] == 'P')
+			{
+				vars->path = "./sprites/floor.xpm";
+				vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
+				vars->path = "./sprites/player.xpm";
+				vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
+				vars->pg_x = j;
+				vars->pg_y = i;
 			}
 			j++;
 		}
@@ -77,27 +125,20 @@ int	ft_make_map(t_vars vars, t_win win_size, int img_x, int img_y)
 int	main(void)
 {
 	t_vars	vars;
-	t_win	win_size;
+	// t_win	win_size;
 	int		img_x;
 	int		img_y;
 
-	vars.path = "./wall.xpm";
 	vars.mlx = mlx_init();
-	win_size.fd = open("./map.ber", O_RDONLY);
-	win_size.bool[win_size.y] = "a";
-	win_size.x = 0;
-	win_size.y = 0;
-	while (win_size.bool[win_size.y] != NULL)
-	{
-		win_size.bool[win_size.y] = ft_get_next_line(win_size.fd);
-		if (win_size.bool[win_size.y] == NULL)
-			break ;
-		if (win_size.x == 0)
-			win_size.x = ft_strlen(win_size.bool[win_size.y]);
-		win_size.y++;
-	}
-	vars.win = mlx_new_window(vars.mlx, win_size.x * 64, win_size.y * 64, "Window Test");
-	ft_make_map(vars, win_size, img_x, img_y);
+	vars.fd = open("./map.ber", O_RDONLY);
+	vars.map = ft_get_next_matrix(vars.fd);
+	vars.y = ft_strlen_y(vars.map);
+	vars.x = ft_strlen(vars.map[0]);
+
+	vars.win = mlx_new_window(vars.mlx, vars.x * 64, vars.y * 64, "Window Test");
+	vars.img = mlx_xpm_file_to_image(vars.mlx, vars.path, &img_x, &img_y);
+	// mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 1);
+	ft_make_map(&vars, &img_x, &img_y);
 	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
 	mlx_key_hook(vars.win, ft_key_print, &vars);
 	mlx_mouse_hook(vars.win, ft_mouse_print, &vars);
