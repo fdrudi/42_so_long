@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/12 18:15:21 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/12 18:51:08 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ int	ft_make_map(t_vars *vars, int *img_x, int *img_y)
 int	main(void)
 {
 	t_vars	vars;
-	// t_win	win_size;
 	int		img_x;
 	int		img_y;
 
@@ -137,7 +136,6 @@ int	main(void)
 
 	vars.win = mlx_new_window(vars.mlx, vars.x * 64, vars.y * 64, "Window Test");
 	vars.img = mlx_xpm_file_to_image(vars.mlx, vars.path, &img_x, &img_y);
-	// mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 1);
 	ft_make_map(&vars, &img_x, &img_y);
 	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
 	mlx_key_hook(vars.win, ft_key_print, &vars);
