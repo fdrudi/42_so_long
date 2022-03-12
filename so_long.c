@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/12 18:51:08 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/12 19:29:08 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,79 @@ int	ft_move_pg(t_vars *vars, int y, int x)
 
 	vars->pg_x += x;
 	vars->pg_y += y;
-	vars->path = "./sprites/player.xpm";
-	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	if (x > 0)
+	{
+		vars->path = "./sprites/player_dx.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	}
+	if (x < 0)
+	{
+		vars->path = "./sprites/player_sx.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	}
+	if (x == 0)
+	{
+		vars->path = "./sprites/player.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	}
 	return (0);
 
 }
 
-int	ft_key_print(int keycode, t_vars *vars)
+int	ft_key_press(int keycode, t_vars *vars)
 {
+	int	img_x;
+	int	img_y;
+
 	if (keycode == 53)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
+	if (keycode == 13)
+	{
+		vars->path = "./sprites/floor.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		vars->path = "./sprites/player.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	}
+	if (keycode == 1)
+	{
+		vars->path = "./sprites/floor.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		vars->path = "./sprites/player.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	}
+	if (keycode == 0)
+	{
+		vars->path = "./sprites/floor.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		vars->path = "./sprites/player_sx.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	}
+	if (keycode == 2)
+	{
+		vars->path = "./sprites/floor.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		vars->path = "./sprites/player_dx.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &img_x, &img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+	}
+	return (0);
+}
+
+int	ft_key_release(int keycode, t_vars *vars)
+{
 	if (keycode == 13 && vars->map[vars->pg_y - 1][vars->pg_x] != '1')
 		ft_move_pg(vars, -1, 0);
 	if (keycode == 1 && vars->map[vars->pg_y + 1][vars->pg_x] != '1')
@@ -138,7 +197,8 @@ int	main(void)
 	vars.img = mlx_xpm_file_to_image(vars.mlx, vars.path, &img_x, &img_y);
 	ft_make_map(&vars, &img_x, &img_y);
 	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
-	mlx_key_hook(vars.win, ft_key_print, &vars);
+	mlx_hook(vars.win, 2, 1L<<0, ft_key_press, &vars);
+	mlx_hook(vars.win, 3, 1L<<1, ft_key_release, &vars);
 	mlx_mouse_hook(vars.win, ft_mouse_print, &vars);
 	mlx_loop(vars.mlx);
 }
