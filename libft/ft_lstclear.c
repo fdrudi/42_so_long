@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdrudi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 14:46:11 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/02/26 14:46:12 by fdrudi           ###   ########.fr       */
+/*   Created: 2022/01/18 14:54:32 by fdrudi            #+#    #+#             */
+/*   Updated: 2022/01/18 15:59:04 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(int *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
 

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_matrix.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:13:22 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/12 12:52:16 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/13 14:49:32 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-int	ft_strlen(char *s)
+int	ft_strlen_gnl(char *s)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *s, char c)
+char	*ft_strjoin_gnl(char *s, char c)
 {
 	int		i;
 	char	*new;
@@ -32,7 +32,7 @@ char	*ft_strjoin(char *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	new = (char *) malloc (sizeof(char) * (ft_strlen(s) + 2));
+	new = (char *) malloc (sizeof(char) * (ft_strlen_gnl(s) + 2));
 	if (!new)
 		return (NULL);
 	while (s[i])
@@ -57,7 +57,7 @@ char	*ft_read_line(int fd, char *dst)
 		len = read(fd, &buf, 1);
 		if (len == -1)
 			return (NULL);
-		dst = ft_strjoin(dst, buf);
+		dst = ft_strjoin_gnl(dst, buf);
 	}
 	if (!dst[1])
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/13 13:22:05 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/13 18:04:13 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@ typedef struct s_vars
 	void	*win;
 	void	*img;
 	char	*path;
+	int		img_x;
+	int		img_y;
 	int		pg_y;
 	int		pg_x;
+	int		*obj_x;
+	int		*obj_y;
+	int		obj_count;
 	int		x;
 	int		y;
 	int		fd;
@@ -42,8 +47,10 @@ typedef struct s_win
 	char	**map;
 }				t_win;
 
-char	**ft_get_next_matrix(int fd);
-int		ft_strlen(char *s);
-char	**ft_split(const char *s, char c);
+int		*ft_intjoin(int *str, int i, int size);
+char	*ft_strclean(char *str);
+int		*ft_int_trim(int *str, int pos, int size);
+
+
 
 #endif

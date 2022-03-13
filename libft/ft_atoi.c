@@ -5,21 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdrudi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 14:44:57 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/02/26 14:45:00 by fdrudi           ###   ########.fr       */
+/*   Created: 2022/01/18 18:36:04 by fdrudi            #+#    #+#             */
+/*   Updated: 2022/01/18 18:36:12 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+static int	long_max(int j, int x)
+{
+	int	y;
+
+	y = 0;
+	if (j >= 19 && x == 1)
+		y = -1;
+	if (j >= 19 && x == -1)
+		y = 0;
+	return (y);
+}
 
 int	ft_atoi(const char *str)
 {
-	int			x;
-	long int	y;
+	int	x;
+	int	y;
+	int	j;
 
 	y = 0;
 	x = 1;
-	if ((*str == 43 || *str == 45) && ft_isdigit(*(str + 1)))
+	j = 0;
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == 43 || *str == 45)
 	{
 		if (*str == 45)
 			x *= -1;
@@ -27,15 +41,12 @@ int	ft_atoi(const char *str)
 	}
 	while (*str <= 57 && *str >= 48)
 	{
-		if (!ft_isdigit(*str) && *str != '\0')
-			ft_display_exit();
 		y = (y * 10) + ((*str - 48) % 10);
 		str++;
+		j++;
 	}
-	if (!ft_isdigit(*str) && *str != '\0')
-		ft_display_exit();
 	y *= x;
-	if (y > 2147483647 || y < -2147483648)
-		ft_display_exit();
-	return ((int) y);
+	if (j >= 19)
+		return (long_max(j, x));
+	return (y);
 }

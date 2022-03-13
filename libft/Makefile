@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fdrudi <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/02/26 14:49:41 by fdrudi            #+#    #+#              #
-#    Updated: 2022/02/26 14:49:59 by fdrudi           ###   ########.fr        #
+#    Created: 2022/01/18 18:43:15 by fdrudi            #+#    #+#              #
+#    Updated: 2022/03/13 14:42:38 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,7 @@ SRCS		=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c\
   				ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c\
 				ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c\
 				ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c\
-				ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c\
-				ft_lstdelone.c ft_lstiter.c ft_lstlast.c\
-				ft_lstnew.c ft_lstsize.c ft_lstmap.c ft_strcmp.c\
-				ft_get_next_line.c ft_display_exit.c\
+				get_next_matrix.c\
 
 OBJS		= ${SRCS:.c=.o}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdrudi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 14:47:59 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/02/26 14:48:01 by fdrudi           ###   ########.fr       */
+/*   Created: 2022/01/18 18:40:28 by fdrudi            #+#    #+#             */
+/*   Updated: 2022/03/13 14:49:07 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,9 @@ char	**ft_split(const char *s, char c)
 {
 	char	**dest;
 	size_t	len;
-	int		i;
 
-	i = 0;
-	if (s[0] == '\0')
-		exit(0);
-	while (s[i] <= 32 && s[i] != '\0')
-	{
-		i++;
-		if (s[i] == '\0')
-			exit(0);
-	}
+	if (!s)
+		return (NULL);
 	len = (ft_strlen(s));
 	dest = (char **) malloc ((nb_words(s, c) + 1) * sizeof(char *));
 	if (!dest)

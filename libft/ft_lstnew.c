@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdrudi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 14:46:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/02/26 14:46:37 by fdrudi           ###   ########.fr       */
+/*   Created: 2022/01/17 16:29:45 by fdrudi            #+#    #+#             */
+/*   Updated: 2022/01/18 18:39:00 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(int content)
+t_list	*ft_lstnew(void *content)
 {
 	t_list	*new;
 
