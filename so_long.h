@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/12 17:44:18 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/13 13:22:05 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "./minilibx_mms_20200219/mlx.h"
+# include "./libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
