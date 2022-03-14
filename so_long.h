@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/14 12:31:16 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/14 16:36:54 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_vars
 	void	*img;
 	char	*path;
 	int		delay;
+	int		delay2;
 	int		img_x;
 	int		img_y;
 	int		pg_y;
@@ -39,7 +40,6 @@ typedef struct s_vars
 	int		y;
 	int		fd;
 	char	**map;
-
 }				t_vars;
 
 typedef struct s_win
@@ -53,7 +53,6 @@ typedef struct s_win
 int		*ft_intjoin(int *str, int i, int size);
 char	*ft_strclean(char *str);
 int		*ft_int_trim(int *str, int pos, int size);
-
-
+int		ft_move_count(t_vars *vars);
 
 #endif

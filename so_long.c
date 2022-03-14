@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/14 13:36:23 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/14 16:37:49 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,20 @@
 
 int	ft_put_floor(t_vars *vars, int x, int y)
 {
-	// mlx_destroy_image(vars->mlx, vars->img);
 	vars->path = "./sprites/floor.xpm";
 	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y * 64);
 	return (0);
 }
 
-int	ft_delay(t_vars *vars, int time)
+int	ft_delay(int *delay, int time)
 {
-	if (vars->delay <= time)
+	if (*delay <= time)
 	{
-		vars->delay++;
+		*delay += 1;
 		return(1);
 	}
-	vars->delay = 0;
+	*delay = 0;
 	return (0);
 }
 
@@ -44,7 +43,7 @@ int	ft_animation(t_vars *vars, char *s2, int x, int y)
 	s1[0] = '\0';
 	ft_put_floor(vars, x, y);
 	s1 = ft_strjoin(s1, s2);
-	s1 = ft_strjoin(s1, ft_itoa(vars->x));
+	s1 = ft_strjoin(s1, ft_itoa(vars->y));
 	vars->path = ft_strjoin(s1, ".xpm");
 	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y * 64);
@@ -56,19 +55,16 @@ int	ft_check_exit(t_vars *vars)
 {
 	static int	i;
 
-	// printf("Work    I : %d\n", i);
-	while (i < 4)
+	if (ft_delay(&vars->delay2, 1000) == 1)
 	{
-		if (printf("return : %d\t", ft_delay(vars, 100)) == 1)
-		{
-			printf("delay : %d\t", vars->delay);
-			return (0);
-		}
-		vars->x = i;
-		printf("Work    I : %d\t", i);
+		return (0);
+	}
+	if (i < 4)
+	{
+		vars->y = i;
 		ft_animation(vars, "./sprites/door", vars->ex_x, vars->ex_y);
-		printf("after    I : %d\n", i);
 		i++;
+		return (0);
 	}
 	vars->obj_count = -1;
 	return (0);
@@ -82,9 +78,9 @@ int	ft_obj_animation(t_vars *vars)
 	j = 0;
 	if (i > 5)
 		i = 0;
-	if (ft_delay(vars, 500) == 1)
+	if (ft_delay(&vars->delay, 500) == 1)
 		return (0);
-	vars->x = i;
+	vars->y = i;
 	while (j < vars->obj_count)
 	{
 		ft_animation(vars, "./sprites/coin", vars->obj_x[j], vars->obj_y[j]);
@@ -96,11 +92,6 @@ int	ft_obj_animation(t_vars *vars)
 
 int	ft_hook_loop(t_vars *vars)
 {
-	// int	x = 0;
-	// int	y = 0;
-
-	// mlx_mouse_get_pos(vars->win, &x, &y);
-	// printf("x : %d      y : %d\n", x, y);
 	ft_obj_animation(vars);
 	if (vars->obj_count == 0)
 		ft_check_exit(vars);
@@ -222,24 +213,28 @@ int	ft_key_release(int keycode, t_vars *vars)
 		if (vars->map[vars->pg_y - 1][vars->pg_x] == 'E' && vars->obj_count > 0)
 			return (0);
 		ft_move_pg(vars, -1, 0);
+		ft_move_count(vars);
 	}
 	if ((keycode == 1 || keycode == 125) && vars->map[vars->pg_y + 1][vars->pg_x] != '1')
 	{
 		if (vars->map[vars->pg_y - 1][vars->pg_x] == 'E' && vars->obj_count > 0)
 			return (0);
 		ft_move_pg(vars, 1, 0);
+		ft_move_count(vars);
 	}
 	if ((keycode == 0 || keycode == 123) && vars->map[vars->pg_y][vars->pg_x - 1] != '1')
 	{
 		if (vars->map[vars->pg_y - 1][vars->pg_x] == 'E' && vars->obj_count > 0)
 			return (0);
 		ft_move_pg(vars, 0, -1);
+		ft_move_count(vars);
 	}
 	if ((keycode == 2 || keycode == 124) && vars->map[vars->pg_y][vars->pg_x + 1] != '1')
 	{
 		if (vars->map[vars->pg_y - 1][vars->pg_x] == 'E' && vars->obj_count > 0)
 			return (0);
 		ft_move_pg(vars, 0, 1);
+		ft_move_count(vars);
 	}
 	return (0);
 }
@@ -333,6 +328,9 @@ int	main(void)
 
 	vars.win = mlx_new_window(vars.mlx, vars.x * 64, vars.y * 64, "Window Test");
 	ft_make_map(&vars, &vars.img_x, &vars.img_y);
+	mlx_string_put(vars.mlx, vars.win, (vars.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
+	mlx_string_put(vars.mlx, vars.win, (vars.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
+	vars.y = 0;
 	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
 	mlx_hook(vars.win, 2, 1L<<0, ft_key_press, &vars);
 	mlx_hook(vars.win, 3, 1L<<1, ft_key_release, &vars);
