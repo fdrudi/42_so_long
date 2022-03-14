@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/13 18:04:13 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/14 12:31:16 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_vars
 	void	*win;
 	void	*img;
 	char	*path;
+	int		delay;
 	int		img_x;
 	int		img_y;
 	int		pg_y;
@@ -32,6 +33,8 @@ typedef struct s_vars
 	int		*obj_x;
 	int		*obj_y;
 	int		obj_count;
+	int		ex_y;
+	int		ex_x;
 	int		x;
 	int		y;
 	int		fd;
