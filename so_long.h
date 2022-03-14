@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/14 16:36:54 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/14 18:05:54 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,25 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
+typedef struct s_win
+{
+	int		x;
+	int		y;
+	int		fd;
+	char	**map;
+}				t_win;
+
 typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
 	void	*img;
 	char	*path;
+	int		end;
+	int		next;
 	int		delay;
 	int		delay2;
+	int		index;
 	int		img_x;
 	int		img_y;
 	int		pg_y;
@@ -36,23 +47,16 @@ typedef struct s_vars
 	int		obj_count;
 	int		ex_y;
 	int		ex_x;
-	int		x;
-	int		y;
-	int		fd;
-	char	**map;
+	t_win	w;
+	// int		x;
+	// int		y;
+	// int		fd;
+	// char	**map;
 }				t_vars;
-
-typedef struct s_win
-{
-	int		x;
-	int		y;
-	int		fd;
-	char	**map;
-}				t_win;
 
 int		*ft_intjoin(int *str, int i, int size);
 char	*ft_strclean(char *str);
 int		*ft_int_trim(int *str, int pos, int size);
-int		ft_move_count(t_vars *vars);
+int		ft_move_count(t_vars *vars, t_win *map);
 
 #endif
