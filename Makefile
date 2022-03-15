@@ -6,7 +6,7 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/14 11:43:00 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/15 12:19:31 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,6 @@ fclean.all:	fclean
 
 re:			fclean all
 
-re.all:		fclean
+re.all:		fclean.all all
 
 .PHONY:		all clean fclean re

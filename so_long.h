@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/14 18:05:54 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/15 12:50:22 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct s_vars
 	int		next;
 	int		delay;
 	int		delay2;
+	int		delay3;
 	int		index;
+	int		moves;
 	int		img_x;
 	int		img_y;
 	int		pg_y;
@@ -58,5 +60,25 @@ int		*ft_intjoin(int *str, int i, int size);
 char	*ft_strclean(char *str);
 int		*ft_int_trim(int *str, int pos, int size);
 int		ft_move_count(t_vars *vars, t_win *map);
+int	ft_key_press(int keycode, t_vars *vars);
+int	ft_key_release(int keycode, t_vars *vars);
+int	ft_move_pg(t_vars *vars, int y, int x);
+int	ft_endgame(t_vars *vars);
+int	ft_reset(t_vars *vars, int n);
+int	ft_next_level(t_vars *vars);
+int	ft_start(t_vars *vars);
+int	ft_make_map(t_vars *vars, int *img_x, int *img_y);
+int	ft_check_next_map(t_vars *vars);
+int	ft_check_obj(t_vars *vars);
+int	ft_strlen_y(char **s);
+int	ft_hook_loop(t_vars *vars);
+int	ft_obj_animation(t_vars *vars);
+int	ft_check_exit(t_vars *vars);
+int	ft_animation(t_vars *vars, char *s2, int x, int y);
+int	ft_delay(int *delay, int time);
+int	ft_put_floor(t_vars *vars, int x, int y);
+int	ft_fade(t_vars *vars);
+
+
 
 #endif

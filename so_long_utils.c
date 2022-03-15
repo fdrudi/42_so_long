@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/14 16:53:13 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/15 11:07:06 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ char	*ft_strclean(char *str)
 
 int	ft_move_count(t_vars *vars, t_win *map)
 {
-	static int	moves;
-
-	moves += 1;
+	vars->moves += 1;
 	vars->path = "./sprites/wall3.xpm";
 	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, (map->x - 1) * 64, 0);
-	mlx_string_put(vars->mlx, vars->win, (map->x - 1) * 64.5, 30, 0xFF00, ft_itoa(moves));
+	mlx_string_put(vars->mlx, vars->win, (map->x - 1) * 64.5, 30, 0xFF00, ft_itoa(vars->moves));
 	return (0);
 }
 

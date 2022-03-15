@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/14 19:33:17 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/15 12:53:37 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	ft_check_exit(t_vars *vars)
 		return (0);
 	}
 	vars->obj_count = -1;
+	i = 0;
 	return (0);
 }
 
@@ -78,7 +79,7 @@ int	ft_obj_animation(t_vars *vars)
 	j = 0;
 	if (i > 5)
 		i = 0;
-	if (ft_delay(&vars->delay, 500) == 1)
+	if (ft_delay(&vars->delay, 700) == 1)
 		return (0);
 	vars->index = i;
 	while (j < vars->obj_count)
@@ -95,6 +96,8 @@ int	ft_hook_loop(t_vars *vars)
 	ft_obj_animation(vars);
 	if (vars->obj_count == 0)
 		ft_check_exit(vars);
+	if (vars->w.map[vars->pg_y][vars->pg_x] == 'E')
+		ft_fade(vars);
 	return (0);
 }
 
@@ -144,175 +147,6 @@ int	ft_check_next_map(t_vars *vars)
 	free(s1);
 	if (fd == -1)
 		return (1);
-	return (0);
-}
-
-int	ft_reset(t_vars *vars, int n)
-{
-	char	*s1;
-
-	s1 = (char *) malloc (sizeof(char) * 1);
-	if (!s1)
-		exit(1);
-	s1[0] = '\0';
-	s1 = ft_strjoin(s1, "./map");
-	s1 = ft_strjoin(s1, ft_itoa(n));
-	s1 = ft_strjoin(s1, ".ber");
-	vars->w.fd = open(s1, O_RDONLY);
-	vars->w.map = ft_get_next_matrix(vars->w.fd);
-	vars->w.y = ft_strlen_y(vars->w.map);
-	vars->w.x = (int) ft_strlen(vars->w.map[0]);
-	close(vars->w.fd);
-	vars->delay = 0;
-	vars->delay2 = 0;
-	vars->index = 0;
-	vars->end = 0;
-	vars->next = 0;
-	free(s1);
-	return (0);
-}
-
-int	ft_endgame(t_vars *vars)
-{
-	if (vars->w.map[vars->pg_y][vars->pg_x] == 'E')
-	{
-		if (ft_check_next_map(vars) == 1)
-		{
-			vars->end = 2;
-			vars->path = "./sprites/game_over.xpm";
-			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, (vars->w.x / 2) * 64, (vars->w.y / 2) * 64);
-			return (0);
-		}
-		vars->end = 1;
-		vars->path = "./sprites/end_level.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, (vars->w.x / 2) * 64, (vars->w.y / 2) * 64);
-	}
-	return (0);
-}
-
-int	ft_move_pg(t_vars *vars, int y, int x)
-{
-	ft_put_floor(vars, vars->pg_x, vars->pg_y);
-	vars->pg_x += x;
-	vars->pg_y += y;
-	if (x > 0)
-	{
-		ft_check_obj(vars);
-		ft_put_floor(vars, vars->pg_x, vars->pg_y);
-		vars->path = "./sprites/player_dx.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-	}
-	if (x < 0)
-	{
-		ft_check_obj(vars);
-		ft_put_floor(vars, vars->pg_x, vars->pg_y);
-		vars->path = "./sprites/player_sx.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-	}
-	if (y > 0)
-	{
-		ft_check_obj(vars);
-		ft_put_floor(vars, vars->pg_x, vars->pg_y);
-		vars->path = "./sprites/player.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-	}
-	if (y < 0)
-	{
-		ft_check_obj(vars);
-		ft_put_floor(vars, vars->pg_x, vars->pg_y);
-		ft_endgame(vars);
-		vars->path = "./sprites/player_back.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-	}
-	return (0);
-}
-
-int	ft_key_press(int keycode, t_vars *vars)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	if (keycode == 15)
-	{
-		ft_reset(vars, vars->next);
-		return (0);
-	}
-	if (vars->end == 1)
-	{
-		if (keycode == 36)
-			ft_reset(vars, vars->next + 1);
-	}
-	if (vars->end == 0)
-	{
-		if (keycode == 13 || keycode == 126)
-		{
-			ft_put_floor(vars, vars->pg_x, vars->pg_y);
-			vars->path = "./sprites/player_back.xpm";
-			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-		}
-			if (keycode == 1 || keycode == 125)
-		{
-			ft_put_floor(vars, vars->pg_x, vars->pg_y);
-			vars->path = "./sprites/player.xpm";
-			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-		}
-		if (keycode == 0 || keycode == 123)
-		{
-			ft_put_floor(vars, vars->pg_x, vars->pg_y);
-			vars->path = "./sprites/player_sx.xpm";
-			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-		}
-		if (keycode == 2 || keycode == 124)
-		{
-			ft_put_floor(vars, vars->pg_x, vars->pg_y);
-			vars->path = "./sprites/player_dx.xpm";
-			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-		}
-	}
-	return (0);
-}
-
-int	ft_key_release(int keycode, t_vars *vars)
-{
-	if (vars->end == 0)
-	{
-		if ((keycode == 13 || keycode == 126) && vars->w.map[vars->pg_y - 1][vars->pg_x] != '1'
-			&& (vars->w.map[vars->pg_y - 1][vars->pg_x] != 'E' || vars->obj_count == -1))
-		{
-			ft_move_pg(vars, -1, 0);
-			ft_move_count(vars, &vars->w);
-		}
-		if ((keycode == 1 || keycode == 125) && vars->w.map[vars->pg_y + 1][vars->pg_x] != '1'
-			&& (vars->w.map[vars->pg_y + 1][vars->pg_x] != 'E' || vars->obj_count == -1))
-		{
-			ft_move_pg(vars, 1, 0);
-			ft_move_count(vars, &vars->w);
-		}
-		if ((keycode == 0 || keycode == 123) && vars->w.map[vars->pg_y][vars->pg_x - 1] != '1'
-			&& (vars->w.map[vars->pg_y][vars->pg_x - 1] != 'E' || vars->obj_count == -1))
-		{
-			ft_move_pg(vars, 0, -1);
-			ft_move_count(vars, &vars->w);
-		}
-		if ((keycode == 2 || keycode == 124) && vars->w.map[vars->pg_y][vars->pg_x + 1] != '1'
-			&& (vars->w.map[vars->pg_y][vars->pg_x + 1] != 'E' || vars->obj_count == -1))
-		{
-			ft_move_pg(vars, 0, 1);
-			ft_move_count(vars, &vars->w);
-		}
-	}
 	return (0);
 }
 
@@ -392,20 +226,266 @@ int	ft_make_map(t_vars *vars, int *img_x, int *img_y)
 	return (0);
 }
 
+int	ft_start(t_vars *vars)
+{
+	char	*s1;
+
+	s1 = (char *) malloc (sizeof(char) * 1);
+	if (!s1)
+		exit(1);
+	s1[0] = '\0';
+	s1 = ft_strjoin(s1, "./map");
+	s1 = ft_strjoin(s1, ft_itoa(vars->next));
+	s1 = ft_strjoin(s1, ".ber");
+	vars->w.fd = open(s1, O_RDONLY);
+	vars->w.map = ft_get_next_matrix(vars->w.fd);
+	vars->w.y = ft_strlen_y(vars->w.map);
+	vars->w.x = (int) ft_strlen(vars->w.map[0]);
+	close(vars->w.fd);
+	vars->delay = 0;
+	vars->delay2 = 0;
+	vars->delay3 = 0;
+	vars->index = 0;
+	vars->end = 0;
+	vars->moves = 0;
+	vars->win = mlx_new_window(vars->mlx, vars->w.x * 64, vars->w.y * 64, "Window Test");
+	ft_make_map(vars, &vars->img_x, &vars->img_y);
+	mlx_string_put(vars->mlx, vars->win, (vars->w.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
+	mlx_string_put(vars->mlx, vars->win, (vars->w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
+
+	mlx_loop_hook(vars->mlx, ft_hook_loop, vars);
+	mlx_hook(vars->win, 2, 1L<<0, ft_key_press, vars);
+	mlx_hook(vars->win, 3, 1L<<1, ft_key_release, vars);
+	mlx_loop(vars->mlx);
+	return (0);
+}
+
+int	ft_next_level(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	vars->mlx = mlx_init();
+	ft_start(vars);
+	return (0);
+}
+
+int	ft_reset(t_vars *vars, int n)
+{
+	char	*s1;
+
+	s1 = (char *) malloc (sizeof(char) * 1);
+	if (!s1)
+		exit(1);
+	s1[0] = '\0';
+	s1 = ft_strjoin(s1, "./map");
+	s1 = ft_strjoin(s1, ft_itoa(n));
+	s1 = ft_strjoin(s1, ".ber");
+	vars->w.fd = open(s1, O_RDONLY);
+	vars->w.map = ft_get_next_matrix(vars->w.fd);
+	vars->w.y = ft_strlen_y(vars->w.map);
+	vars->w.x = (int) ft_strlen(vars->w.map[0]);
+	close(vars->w.fd);
+	vars->delay = 0;
+	vars->delay2 = 0;
+	vars->delay3 = 0;
+	vars->index = 0;
+	vars->end = 0;
+	vars->moves = 0;
+	free(s1);
+	if (vars->win != 0 && n == vars->next + 1)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		vars->mlx = 0;
+		vars->mlx = mlx_init();
+		vars->win = 0;
+		vars->win = mlx_new_window(vars->mlx, vars->w.x * 64, vars->w.y * 64, "Window Test");
+	}
+	ft_make_map(vars, &vars->img_x, &vars->img_y);
+	mlx_string_put(vars->mlx, vars->win, (vars->w.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
+	mlx_string_put(vars->mlx, vars->win, (vars->w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
+	return (0);
+}
+
+int	ft_fade(t_vars *vars)
+{
+	static int	i;
+
+	if (ft_delay(&vars->delay3, 1000) == 1)
+	{
+		return (1);
+	}
+	if (i < 8)
+	{
+		vars->index = i;
+		ft_animation(vars, "./sprites/pg_fade/pg_fade", vars->ex_x, vars->ex_y);
+		i++;
+		return (1);
+	}
+	i = 0;
+	return (0);
+}
+
+int	ft_endgame(t_vars *vars)
+{
+	if (vars->w.map[vars->pg_y][vars->pg_x] == 'E')
+	{
+		if (ft_check_next_map(vars) == 1)
+		{
+			vars->end = 2;
+			vars->path = "./sprites/game_over.xpm";
+			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, (vars->w.x / 2) * 64, (vars->w.y / 2) * 64);
+		}
+		else
+		{
+			vars->end = 1;
+			vars->path = "./sprites/end_level.xpm";
+			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, (vars->w.x / 2) * 64, (vars->w.y / 2) * 64);
+		}
+	}
+	return (0);
+}
+
+int	ft_move_pg(t_vars *vars, int y, int x)
+{
+	ft_put_floor(vars, vars->pg_x, vars->pg_y);
+	vars->pg_x += x;
+	vars->pg_y += y;
+	if (x > 0)
+	{
+		ft_check_obj(vars);
+		if (vars->w.map[vars->pg_y][vars->pg_x] != 'E')
+			ft_put_floor(vars, vars->pg_x, vars->pg_y);
+		vars->path = "./sprites/player_dx.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		ft_endgame(vars);
+	}
+	if (x < 0)
+	{
+		ft_check_obj(vars);
+		if (vars->w.map[vars->pg_y][vars->pg_x] != 'E')
+			ft_put_floor(vars, vars->pg_x, vars->pg_y);
+		vars->path = "./sprites/player_sx.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		ft_endgame(vars);
+	}
+	if (y > 0)
+	{
+		ft_check_obj(vars);
+		if (vars->w.map[vars->pg_y][vars->pg_x] != 'E')
+			ft_put_floor(vars, vars->pg_x, vars->pg_y);
+		vars->path = "./sprites/player.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		ft_endgame(vars);
+	}
+	if (y < 0)
+	{
+		ft_check_obj(vars);
+		if (vars->w.map[vars->pg_y][vars->pg_x] != 'E')
+			ft_put_floor(vars, vars->pg_x, vars->pg_y);
+		vars->path = "./sprites/player_back.xpm";
+		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		ft_endgame(vars);
+	}
+	return (0);
+}
+
+int	ft_key_press(int keycode, t_vars *vars)
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
+	if (keycode == 15)
+	{
+		ft_reset(vars, vars->next);
+		return (0);
+	}
+	if (vars->end == 1)
+	{
+		if (keycode == 36)
+		{
+			vars->next += 1;
+			ft_next_level(vars);
+		}
+	}
+	if (vars->end == 0)
+	{
+		if (keycode == 13 || keycode == 126)
+		{
+			ft_put_floor(vars, vars->pg_x, vars->pg_y);
+			vars->path = "./sprites/player_back.xpm";
+			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		}
+			if (keycode == 1 || keycode == 125)
+		{
+			ft_put_floor(vars, vars->pg_x, vars->pg_y);
+			vars->path = "./sprites/player.xpm";
+			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		}
+		if (keycode == 0 || keycode == 123)
+		{
+			ft_put_floor(vars, vars->pg_x, vars->pg_y);
+			vars->path = "./sprites/player_sx.xpm";
+			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		}
+		if (keycode == 2 || keycode == 124)
+		{
+			ft_put_floor(vars, vars->pg_x, vars->pg_y);
+			vars->path = "./sprites/player_dx.xpm";
+			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
+		}
+	}
+	return (0);
+}
+
+int	ft_key_release(int keycode, t_vars *vars)
+{
+	if (vars->end == 0)
+	{
+		if ((keycode == 13 || keycode == 126) && vars->w.map[vars->pg_y - 1][vars->pg_x] != '1'
+			&& (vars->w.map[vars->pg_y - 1][vars->pg_x] != 'E' || vars->obj_count == -1))
+		{
+			ft_move_pg(vars, -1, 0);
+			ft_move_count(vars, &vars->w);
+		}
+		if ((keycode == 1 || keycode == 125) && vars->w.map[vars->pg_y + 1][vars->pg_x] != '1'
+			&& (vars->w.map[vars->pg_y + 1][vars->pg_x] != 'E' || vars->obj_count == -1))
+		{
+			ft_move_pg(vars, 1, 0);
+			ft_move_count(vars, &vars->w);
+		}
+		if ((keycode == 0 || keycode == 123) && vars->w.map[vars->pg_y][vars->pg_x - 1] != '1'
+			&& (vars->w.map[vars->pg_y][vars->pg_x - 1] != 'E' || vars->obj_count == -1))
+		{
+			ft_move_pg(vars, 0, -1);
+			ft_move_count(vars, &vars->w);
+		}
+		if ((keycode == 2 || keycode == 124) && vars->w.map[vars->pg_y][vars->pg_x + 1] != '1'
+			&& (vars->w.map[vars->pg_y][vars->pg_x + 1] != 'E' || vars->obj_count == -1))
+		{
+			ft_move_pg(vars, 0, 1);
+			ft_move_count(vars, &vars->w);
+		}
+	}
+	return (0);
+}
+
 int	main(void)
 {
 	t_vars	vars;
 
 	vars.mlx = mlx_init();
-	ft_reset(&vars, 0);
-
-	vars.win = mlx_new_window(vars.mlx, vars.w.x * 64, vars.w.y * 64, "Window Test");
-	ft_make_map(&vars, &vars.img_x, &vars.img_y);
-	mlx_string_put(vars.mlx, vars.win, (vars.w.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
-	mlx_string_put(vars.mlx, vars.win, (vars.w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
-
-	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
-	mlx_hook(vars.win, 2, 1L<<0, ft_key_press, &vars);
-	mlx_hook(vars.win, 3, 1L<<1, ft_key_release, &vars);
-	mlx_loop(vars.mlx);
+	vars.next = 0;
+	ft_start(&vars);
+	return (0);
 }
