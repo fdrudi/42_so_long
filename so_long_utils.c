@@ -6,11 +6,21 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/15 11:07:06 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/15 16:26:27 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	ft_strlen_y(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != 0)
+		i++;
+	return (i);
+}
 
 int	*ft_intjoin(int *str, int new, int size)
 {
@@ -43,16 +53,6 @@ char	*ft_strclean(char *str)
 	new[0] = '\0';
 	free(str);
 	return(new);
-}
-
-int	ft_move_count(t_vars *vars, t_win *map)
-{
-	vars->moves += 1;
-	vars->path = "./sprites/wall3.xpm";
-	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, (map->x - 1) * 64, 0);
-	mlx_string_put(vars->mlx, vars->win, (map->x - 1) * 64.5, 30, 0xFF00, ft_itoa(vars->moves));
-	return (0);
 }
 
 int	*ft_int_trim(int *str, int pos, int size)

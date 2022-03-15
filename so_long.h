@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/15 12:50:22 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/15 19:17:29 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef struct s_win
 	char	**map;
 }				t_win;
 
+typedef struct s_enemy
+{
+	int		*enm_x;
+	int		*enm_y;
+	int		enm_count;
+}				t_enemy;
+
 typedef struct s_vars
 {
 	void	*mlx;
@@ -38,6 +45,7 @@ typedef struct s_vars
 	int		delay;
 	int		delay2;
 	int		delay3;
+	int		delay4;
 	int		index;
 	int		moves;
 	int		img_x;
@@ -50,6 +58,7 @@ typedef struct s_vars
 	int		ex_y;
 	int		ex_x;
 	t_win	w;
+	t_enemy	n;
 	// int		x;
 	// int		y;
 	// int		fd;
@@ -78,7 +87,7 @@ int	ft_animation(t_vars *vars, char *s2, int x, int y);
 int	ft_delay(int *delay, int time);
 int	ft_put_floor(t_vars *vars, int x, int y);
 int	ft_fade(t_vars *vars);
-
+int	ft_enemy_animation(t_vars *vars);
 
 
 #endif

@@ -6,13 +6,13 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/15 12:19:31 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/15 16:37:46 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	so_long
 
-SRC			=	so_long.c so_long_utils.c\
+SRC			=	so_long.c so_long_utils.c map_utils.c check.c animation.c\
 
 OBJ			=	$(SRC:.c=.o)
 
