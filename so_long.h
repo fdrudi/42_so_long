@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/16 12:54:57 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/16 14:02:54 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_enemy
 {
 	int		*enm_x;
 	int		*enm_y;
+	int		*x_move;
+	int		*y_move;
 	int		enm_count;
 }				t_enemy;
 
