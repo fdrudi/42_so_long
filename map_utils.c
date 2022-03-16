@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/15 19:36:06 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/16 11:55:12 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_make_map(t_vars *vars, int *img_x, int *img_y)
 			}
 			else
 			{
-				ft_put_floor(vars, j, i);
+				ft_put_floor_map(vars, j, i);
 				if (vars->w.map[i][j] == 'P')
 				{
 					vars->path = "./sprites/player.xpm";
@@ -85,7 +85,7 @@ int	ft_make_map(t_vars *vars, int *img_x, int *img_y)
 				}
 				if (vars->w.map[i][j] == 'N')
 				{
-					vars->path = "./sprites/enemy/golem_back0.xpm";
+					vars->path = "./sprites/enemy/enemy_back0.xpm";
 					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
 					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
 					if (vars->n.enm_count == 0)

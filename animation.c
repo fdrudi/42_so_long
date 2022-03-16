@@ -6,11 +6,20 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/15 19:35:20 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/16 13:14:49 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	ft_put_floor_map(t_vars *vars, int x, int y)
+{
+	vars->path = "./sprites/floor_map.xpm";
+	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y * 64);
+	ft_put_floor(vars, x, y);
+	return (0);
+}
 
 int	ft_put_floor(t_vars *vars, int x, int y)
 {
@@ -46,6 +55,52 @@ int	ft_animation(t_vars *vars, char *s2, int x, int y)
 	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y * 64);
 	free(s1);
+	return (0);
+}
+
+// int	ft_check_enemy_moves(t_vars *vars, int i)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	x = vars->pg_x - vars->n.enm_x[i];
+// 	y = vars->pg_y - vars->n.enm_y[i];
+// 	ft_max_nbr(x, y);
+// }
+
+int	ft_enemy_animation(t_vars *vars)
+{
+	int			j;
+	static int	i;
+
+	j = 0;
+	if (i > 4)
+		i = 0;
+	if (ft_delay(&vars->delay4, 1000) == 1)
+		return (0);
+	vars->index = i;
+	while (j < vars->n.enm_count)
+	{
+		// ft_check_enemy_moves(vars, j);
+		if (vars->w.map[vars->n.enm_y[j] - 1][vars->n.enm_x[j]] == '1' && i == 1)
+		{
+			return (0);
+		}
+			if (vars->w.map[vars->n.enm_y[j] + 1][vars->n.enm_x[j]] != '1')
+				ft_put_floor(vars, vars->n.enm_x[j], vars->n.enm_y[j] + 1);
+			if (i == 2)
+			{
+				ft_animation(vars, "./sprites/enemy/enemy_back", vars->n.enm_x[j], vars->n.enm_y[j]);
+				i++;
+				vars->index = i;
+				ft_animation(vars, "./sprites/enemy/enemy_back", vars->n.enm_x[j], vars->n.enm_y[j] - 1);
+				vars->n.enm_y[j] -= 1;
+			}
+			else
+				ft_animation(vars, "./sprites/enemy/enemy_back", vars->n.enm_x[j], vars->n.enm_y[j]);
+		j++;
+	}
+	i++;
 	return (0);
 }
 

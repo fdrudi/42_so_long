@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/15 19:17:29 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/16 12:54:57 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_vars
 	char	*path;
 	int		end;
 	int		next;
+	int		lst_key;
 	int		delay;
 	int		delay2;
 	int		delay3;
@@ -86,8 +87,11 @@ int	ft_check_exit(t_vars *vars);
 int	ft_animation(t_vars *vars, char *s2, int x, int y);
 int	ft_delay(int *delay, int time);
 int	ft_put_floor(t_vars *vars, int x, int y);
+int	ft_put_floor_map(t_vars *vars, int x, int y);
 int	ft_fade(t_vars *vars);
 int	ft_enemy_animation(t_vars *vars);
+int	ft_check_enemy_moves(t_vars *vars, int i);
+int	ft_close_win(t_vars *vars);
 
 
 #endif

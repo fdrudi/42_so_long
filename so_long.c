@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/15 19:33:28 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/16 12:55:06 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,20 @@
 
 int	ft_hook_loop(t_vars *vars)
 {
+	ft_enemy_animation(vars);
 	ft_obj_animation(vars);
 	if (vars->obj_count == 0)
 		ft_check_exit(vars);
 	if (vars->w.map[vars->pg_y][vars->pg_x] == 'E')
 		ft_fade(vars);
+	return (0);
+}
+
+int	ft_close_win(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	// ft_exit(vars);
+	exit(0);
 	return (0);
 }
 
@@ -52,6 +61,7 @@ int	ft_start(t_vars *vars)
 	mlx_string_put(vars->mlx, vars->win, (vars->w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
 	mlx_hook(vars->win, 2, 1L<<0, ft_key_press, vars);
 	mlx_hook(vars->win, 3, 1L<<1, ft_key_release, vars);
+	mlx_hook(vars->win, 17, 0, ft_close_win, vars);
 	return (0);
 }
 
@@ -122,11 +132,7 @@ void	ft_exit(t_vars *vars)
 int	ft_key_press(int keycode, t_vars *vars)
 {
 	if (keycode == 53)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		// ft_exit(vars);
-		exit(0);
-	}
+		ft_close_win(vars);
 	if (keycode == 15)
 	{
 		ft_reset(vars, vars->next);
@@ -182,26 +188,52 @@ int	ft_key_release(int keycode, t_vars *vars)
 		if ((keycode == 13 || keycode == 126) && vars->w.map[vars->pg_y - 1][vars->pg_x] != '1'
 			&& (vars->w.map[vars->pg_y - 1][vars->pg_x] != 'E' || vars->obj_count == -1))
 		{
+			if (vars->lst_key != 1)
+			{
+				vars->lst_key = 1;
+				return (0);
+			}
 			ft_move_pg(vars, -1, 0);
 			ft_move_count(vars, &vars->w);
+			vars->lst_key = 1;
+
 		}
 		if ((keycode == 1 || keycode == 125) && vars->w.map[vars->pg_y + 1][vars->pg_x] != '1'
 			&& (vars->w.map[vars->pg_y + 1][vars->pg_x] != 'E' || vars->obj_count == -1))
 		{
+			if (vars->lst_key != 2)
+			{
+				vars->lst_key = 2;
+				return (0);
+			}
 			ft_move_pg(vars, 1, 0);
 			ft_move_count(vars, &vars->w);
+			vars->lst_key = 2;
+
 		}
 		if ((keycode == 0 || keycode == 123) && vars->w.map[vars->pg_y][vars->pg_x - 1] != '1'
 			&& (vars->w.map[vars->pg_y][vars->pg_x - 1] != 'E' || vars->obj_count == -1))
 		{
+			if (vars->lst_key != 3)
+			{
+				vars->lst_key = 3;
+				return (0);
+			}
 			ft_move_pg(vars, 0, -1);
 			ft_move_count(vars, &vars->w);
+			vars->lst_key = 3;
 		}
 		if ((keycode == 2 || keycode == 124) && vars->w.map[vars->pg_y][vars->pg_x + 1] != '1'
 			&& (vars->w.map[vars->pg_y][vars->pg_x + 1] != 'E' || vars->obj_count == -1))
 		{
+			if (vars->lst_key != 4)
+			{
+				vars->lst_key = 4;
+				return (0);
+			}
 			ft_move_pg(vars, 0, 1);
 			ft_move_count(vars, &vars->w);
+			vars->lst_key = 4;
 		}
 	}
 	return (0);
@@ -216,6 +248,7 @@ int	main(void)
 	ft_start(&vars);
 
 	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
+	mlx_hook(vars.win, 17, 0, ft_close_win, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
