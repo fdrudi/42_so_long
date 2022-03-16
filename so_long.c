@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/16 12:55:06 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/16 16:34:28 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ft_start(t_vars *vars)
 	vars->delay = 0;
 	vars->delay2 = 0;
 	vars->delay3 = 0;
+	vars->delay4 = 0;
 	vars->index = 0;
 	vars->end = 0;
 	vars->moves = 0;
@@ -92,6 +93,7 @@ int	ft_reset(t_vars *vars, int n)
 	vars->delay = 0;
 	vars->delay2 = 0;
 	vars->delay3 = 0;
+	vars->delay4 = 0;
 	vars->index = 0;
 	vars->end = 0;
 	vars->moves = 0;
@@ -245,6 +247,8 @@ int	main(void)
 
 	vars.mlx = mlx_init();
 	vars.next = 0;
+	vars.n.x_move = (int *) malloc (sizeof(int) * 1);
+	vars.n.y_move = (int *) malloc (sizeof(int) * 1);
 	ft_start(&vars);
 
 	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
