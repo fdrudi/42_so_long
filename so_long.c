@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/16 16:34:28 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/16 19:16:43 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,9 @@ int	main(void)
 	vars.next = 0;
 	vars.n.x_move = (int *) malloc (sizeof(int) * 1);
 	vars.n.y_move = (int *) malloc (sizeof(int) * 1);
+	vars.n.t_move = (int *) malloc (sizeof(int) * 1);
+	vars.n.j_move = (int *) malloc (sizeof(int) * 1);
+
 	ft_start(&vars);
 
 	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
