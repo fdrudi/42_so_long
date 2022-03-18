@@ -6,99 +6,99 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/16 11:55:12 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/18 19:31:33 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_make_map(t_vars *vars, int *img_x, int *img_y)
+int	ft_make_map(t_env *e, int *img_x, int *img_y)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	vars->obj_count = 0;
-	vars->obj_x = (int *) malloc (sizeof(int) * 1);
-	vars->obj_y = (int *) malloc (sizeof(int) * 1);
-	vars->n.enm_count = 0;
-	vars->n.enm_x = (int *) malloc (sizeof(int) * 1);
-	vars->n.enm_y = (int *) malloc (sizeof(int) * 1);
-	if (!vars->obj_x || !vars->obj_y)
+	e->obj_c = 0;
+	e->obj_x = (int *) malloc (sizeof(int) * 1);
+	e->obj_y = (int *) malloc (sizeof(int) * 1);
+	e->n.n_c = 0;
+	e->n.n_x = (int *) malloc (sizeof(int) * 1);
+	e->n.n_y = (int *) malloc (sizeof(int) * 1);
+	if (!e->obj_x || !e->obj_y)
 		exit(1);
-	while (i < vars->w.y)
+	while (i < e->w.y)
 	{
 		j = 0;
-		while (j < vars->w.x)
+		while (j < e->w.x)
 		{
-			if (vars->w.map[i][j] == '1')
+			if (e->w.m[i][j] == '1')
 			{
-				if ((vars->w.map[i][j - 1] != '1' && vars->w.map[i][j + 1] != '1' && j > 0 && j < vars->w.x - 1) || i == 0 || i == vars->w.y -1)
+				if ((e->w.m[i][j - 1] != '1' && e->w.m[i][j + 1] != '1' && j > 0 && j < e->w.x - 1) || i == 0 || i == e->w.y -1)
 				{
-					vars->path = "./sprites/wall3.xpm";
-					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
+					e->path = "./sprites/wall3.xpm";
+					e->img = mlx_xpm_file_to_image(e->mlx, e->path, img_x, img_y);
+					mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 				}
 				else
 				{
-					vars->path = "./sprites/wall4.xpm";
-					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
+					e->path = "./sprites/wall4.xpm";
+					e->img = mlx_xpm_file_to_image(e->mlx, e->path, img_x, img_y);
+					mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 				}
 			}
 			else
 			{
-				ft_put_floor_map(vars, j, i);
-				if (vars->w.map[i][j] == 'P')
+				ft_put_floor_map(e, j, i);
+				if (e->w.m[i][j] == 'P')
 				{
-					vars->path = "./sprites/player.xpm";
-					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
-					vars->pg_x = j;
-					vars->pg_y = i;
+					e->path = "./sprites/player.xpm";
+					e->img = mlx_xpm_file_to_image(e->mlx, e->path, img_x, img_y);
+					mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
+					e->pg_x = j;
+					e->pg_y = i;
 				}
-				if (vars->w.map[i][j] == 'C')
+				if (e->w.m[i][j] == 'C')
 				{
-					vars->path = "./sprites/coin0.xpm";
-					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
-					if (vars->obj_count == 0)
+					e->path = "./sprites/coin0.xpm";
+					e->img = mlx_xpm_file_to_image(e->mlx, e->path, img_x, img_y);
+					mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
+					if (e->obj_c == 0)
 					{
-						vars->obj_x[0] = j;
-						vars->obj_y[0] = i;
+						e->obj_x[0] = j;
+						e->obj_y[0] = i;
 					}
 					else
 					{
-						vars->obj_x = ft_intjoin(vars->obj_x, j, vars->obj_count);
-						vars->obj_y = ft_intjoin(vars->obj_y, i, vars->obj_count);
+						e->obj_x = ft_intjoin(e->obj_x, j, e->obj_c);
+						e->obj_y = ft_intjoin(e->obj_y, i, e->obj_c);
 					}
-					vars->obj_count += 1;
+					e->obj_c += 1;
 				}
-				if (vars->w.map[i][j] == 'E')
+				if (e->w.m[i][j] == 'E')
 				{
-					vars->path = "./sprites/door0.xpm";
-					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
-					vars->ex_x = j;
-					vars->ex_y = i;
+					e->path = "./sprites/door0.xpm";
+					e->img = mlx_xpm_file_to_image(e->mlx, e->path, img_x, img_y);
+					mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
+					e->ex_x = j;
+					e->ex_y = i;
 				}
-				if (vars->w.map[i][j] == 'N')
+				if (e->w.m[i][j] == 'N')
 				{
-					vars->path = "./sprites/enemy/enemy_back0.xpm";
-					vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, img_x, img_y);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->img, j * 64, i * 64);
-					if (vars->n.enm_count == 0)
+					e->path = "./sprites/enemy/enemy_back0.xpm";
+					e->img = mlx_xpm_file_to_image(e->mlx, e->path, img_x, img_y);
+					mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
+					if (e->n.n_c == 0)
 					{
-						vars->n.enm_x[0] = j;
-						vars->n.enm_y[0] = i;
+						e->n.n_x[0] = j;
+						e->n.n_y[0] = i;
 					}
 					else
 					{
-						vars->n.enm_x = ft_intjoin(vars->n.enm_x, j, vars->n.enm_count);
-						vars->n.enm_y = ft_intjoin(vars->n.enm_y, i, vars->n.enm_count);
+						e->n.n_x = ft_intjoin(e->n.n_x, j, e->n.n_c);
+						e->n.n_y = ft_intjoin(e->n.n_y, i, e->n.n_c);
 					}
-					vars->n.enm_count += 1;
+					e->n.n_c += 1;
 				}
 			}
 			j++;

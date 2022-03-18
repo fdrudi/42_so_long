@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 15:33:52 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/18 19:32:55 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ typedef struct s_win
 	int		x;
 	int		y;
 	int		fd;
-	char	**map;
+	char	**m;
 }				t_win;
 
 typedef struct s_enemy
 {
-	int		*enm_x;
-	int		*enm_y;
-	int		*x_move;
-	int		*y_move;
-	int		enm_count;
+	int		*n_x;
+	int		*n_y;
+	int		*x_m;
+	int		*y_m;
+	int		n_c;
 	int		*patr;
 }				t_enemy;
 
-typedef struct s_vars
+typedef struct s_env
 {
 	void	*mlx;
 	void	*win;
@@ -46,57 +46,56 @@ typedef struct s_vars
 	int		end;
 	int		next;
 	int		lst_key;
-	int		delay;
-	int		delay2;
-	int		delay3;
-	int		delay4;
-	int		delay5;
+	int		d;
+	int		d2;
+	int		d3;
+	int		d4;
+	int		d5;
 	int		index;
-	int		moves;
+	int		mv;
 	int		img_x;
 	int		img_y;
 	int		pg_y;
 	int		pg_x;
 	int		*obj_x;
 	int		*obj_y;
-	int		obj_count;
+	int		obj_c;
 	int		ex_y;
 	int		ex_x;
 	t_win	w;
 	t_enemy	n;
-	// int		x;
-	// int		y;
-	// int		fd;
-	// char	**map;
-}				t_vars;
+}				t_env;
 
 int		*ft_intjoin(int *str, int i, int size);
 char	*ft_strclean(char *str);
 int		*ft_int_trim(int *str, int pos, int size);
-int		ft_move_count(t_vars *vars, t_win *map);
-int	ft_key_press(int keycode, t_vars *vars);
-int	ft_key_release(int keycode, t_vars *vars);
-int	ft_move_pg(t_vars *vars, int y, int x);
-int	ft_endgame(t_vars *vars);
-int	ft_reset(t_vars *vars, int n);
-int	ft_next_level(t_vars *vars);
-int	ft_start(t_vars *vars);
-int	ft_make_map(t_vars *vars, int *img_x, int *img_y);
-int	ft_check_next_map(t_vars *vars);
-int	ft_check_obj(t_vars *vars);
+int		ft_move_count(t_env *e, t_win *m);
+int	ft_key_press(int key, t_env *e);
+int	ft_key_release(int key, t_env *e);
+int	ft_move_pg(t_env *e, int y, int x);
+int	ft_endgame(t_env *e);
+int	ft_reset(t_env *e, int n);
+int	ft_next_level(t_env *e);
+void	ft_exit(t_env *e);
+void	free_matrix(char **matrix);
+int	ft_start(t_env *e);
+int	ft_make_map(t_env *e, int *img_x, int *img_y);
+int	ft_check_next_map(t_env *e);
+int	ft_check_obj(t_env *e);
 int	ft_strlen_y(char **s);
-int	ft_hook_loop(t_vars *vars);
-int	ft_obj_animation(t_vars *vars);
-int	ft_check_exit(t_vars *vars);
-int	ft_animation(t_vars *vars, char *s2, int x, int y);
+int	ft_hook_loop(t_env *e);
+int	ft_obj_animation(t_env *e);
+int	ft_check_exit(t_env *e);
+int	ft_animation(t_env *e, char *s2, int x, int y);
 int	ft_delay(int *delay, int time);
-int	ft_put_floor(t_vars *vars, int x, int y);
-int	ft_put_floor_map(t_vars *vars, int x, int y);
-int	ft_fade(t_vars *vars);
-int	ft_enemy_animation(t_vars *vars);
-int	ft_check_enemy_moves(t_vars *vars, int j);
-int	ft_close_win(t_vars *vars);
-int	ft_enemy_patrol(t_vars *vars);
+int	ft_put_floor(t_env *e, int x, int y);
+int	ft_put_floor_map(t_env *e, int x, int y);
+int	ft_fade(t_env *e);
+int	ft_enemy_animation(t_env *e);
+int	ft_check_enemy_moves(t_env *e, int j);
+int	ft_close_win(t_env *e);
+int	ft_enemy_patrol(t_env *e);
+int	ft_check_pg(t_env *e, int j, int i);
 
 
 #endif

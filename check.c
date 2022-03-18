@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:08 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/16 13:58:02 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/18 19:31:23 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,94 +26,94 @@ int	ft_min_nbr(int a, int b)
 		return (a);
 }
 
-int	ft_check_size_map(t_vars *vars)
+int	ft_check_size_map(t_env *e)
 {
-	if (ft_min_nbr(vars->w.x, vars->w.y) >= 17)
-		vars->path = "./sprites/next_level/next_level_21.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 15)
-		vars->path = "./sprites/next_level/next_level_17.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 10)
-		vars->path = "./sprites/next_level/next_level_15.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 7)
-		vars->path = "./sprites/next_level/next_level_10.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 5)
-		vars->path = "./sprites/next_level/next_level_7.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 3)
-		vars->path = "./sprites/next_level/next_level_5.xpm";
+	if (ft_min_nbr(e->w.x, e->w.y) >= 17)
+		e->path = "./sprites/next_level/next_level_21.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 15)
+		e->path = "./sprites/next_level/next_level_17.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 10)
+		e->path = "./sprites/next_level/next_level_15.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 7)
+		e->path = "./sprites/next_level/next_level_10.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 5)
+		e->path = "./sprites/next_level/next_level_7.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 3)
+		e->path = "./sprites/next_level/next_level_5.xpm";
 	return (0);
 }
 
-int	ft_check_size_map2(t_vars *vars)
+int	ft_check_size_map2(t_env *e)
 {
-	if (ft_min_nbr(vars->w.x, vars->w.y) >= 17)
-		vars->path = "./sprites/game_over/game_over_21.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 15)
-		vars->path = "./sprites/game_over/game_over_17.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 10)
-		vars->path = "./sprites/game_over/game_over_15.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 7)
-		vars->path = "./sprites/game_over/game_over_10.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 5)
-		vars->path = "./sprites/game_over/game_over_7.xpm";
-	else if (ft_min_nbr(vars->w.x, vars->w.y) >= 3)
-		vars->path = "./sprites/game_over/game_over_5.xpm";
+	if (ft_min_nbr(e->w.x, e->w.y) >= 17)
+		e->path = "./sprites/game_over/game_over_21.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 15)
+		e->path = "./sprites/game_over/game_over_17.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 10)
+		e->path = "./sprites/game_over/game_over_15.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 7)
+		e->path = "./sprites/game_over/game_over_10.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 5)
+		e->path = "./sprites/game_over/game_over_7.xpm";
+	else if (ft_min_nbr(e->w.x, e->w.y) >= 3)
+		e->path = "./sprites/game_over/game_over_5.xpm";
 	return (0);
 }
 
-int	ft_endgame(t_vars *vars)
+int	ft_endgame(t_env *e)
 {
-	if (vars->w.map[vars->pg_y][vars->pg_x] == 'E')
+	if (e->w.m[e->pg_y][e->pg_x] == 'E')
 	{
-		if (ft_check_next_map(vars) == 1)
+		if (ft_check_next_map(e) == 1)
 		{
-			vars->end = 2;
-			ft_check_size_map2(vars);
-			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, (vars->w.x / 3) * 64, (vars->w.y / 3) * 64);
+			e->end = 2;
+			ft_check_size_map2(e);
+			e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+			mlx_put_image_to_window(e->mlx, e->win, e->img, (e->w.x / 3) * 64, (e->w.y / 3) * 64);
 		}
 		else
 		{
-			vars->end = 1;
-			ft_check_size_map(vars);
-			vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, ((vars->w.x / 2) - (vars->w.x / 3)) * 64, 64);
+			e->end = 1;
+			ft_check_size_map(e);
+			e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+			mlx_put_image_to_window(e->mlx, e->win, e->img, ((e->w.x / 2) - (e->w.x / 3)) * 64, 64);
 		}
 	}
 	return (0);
 }
 
-int	ft_check_exit(t_vars *vars)
+int	ft_check_exit(t_env *e)
 {
 	static int	i;
 
-	if (ft_delay(&vars->delay2, 1000) == 1)
+	if (ft_delay(&e->d2, 1000) == 1)
 	{
 		return (0);
 	}
 	if (i < 4)
 	{
-		vars->index = i;
-		ft_animation(vars, "./sprites/door", vars->ex_x, vars->ex_y);
+		e->index = i;
+		ft_animation(e, "./sprites/door", e->ex_x, e->ex_y);
 		i++;
 		return (0);
 	}
-	vars->obj_count = -1;
+	e->obj_c = -1;
 	i = 0;
 	return (0);
 }
 
-int	ft_check_obj(t_vars *vars)
+int	ft_check_obj(t_env *e)
 {
 	int	i;
 
 	i = 0;
-	while (i < vars->obj_count)
+	while (i < e->obj_c)
 	{
-		if (vars->pg_x == vars->obj_x[i] && vars->pg_y == vars->obj_y[i])
+		if (e->pg_x == e->obj_x[i] && e->pg_y == e->obj_y[i])
 		{
-			vars->obj_x = ft_int_trim(vars->obj_x, i, vars->obj_count);
-			vars->obj_y = ft_int_trim(vars->obj_y, i, vars->obj_count);
-			vars->obj_count -= 1;
+			e->obj_x = ft_int_trim(e->obj_x, i, e->obj_c);
+			e->obj_y = ft_int_trim(e->obj_y, i, e->obj_c);
+			e->obj_c -= 1;
 			return (0);
 		}
 		i++;
@@ -121,7 +121,7 @@ int	ft_check_obj(t_vars *vars)
 	return (0);
 }
 
-int	ft_check_next_map(t_vars *vars)
+int	ft_check_next_map(t_env *e)
 {
 	char	*s1;
 	int		fd;
@@ -132,7 +132,7 @@ int	ft_check_next_map(t_vars *vars)
 		exit(1);
 	s1[0] = '\0';
 	s1 = ft_strjoin(s1, "./map");
-	s1 = ft_strjoin(s1, ft_itoa(vars->next + 1));
+	s1 = ft_strjoin(s1, ft_itoa(e->next + 1));
 	s1 = ft_strjoin(s1, ".ber");
 	fd = open(s1, O_RDONLY);
 	free(s1);

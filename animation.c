@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 16:27:47 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/18 19:31:11 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,35 @@
 
 #include <stdio.h>
 
-int	ft_put_floor_map(t_vars *vars, int x, int y)
+int	ft_put_floor_map(t_env *e, int x, int y)
 {
-	vars->path = "./sprites/floor_map.xpm";
-	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y * 64);
-	ft_put_floor(vars, x, y);
+	e->path = "./sprites/floor_map.xpm";
+	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
+	ft_put_floor(e, x, y);
 	return (0);
 }
 
-int	ft_put_floor(t_vars *vars, int x, int y)
+int	ft_put_floor(t_env *e, int x, int y)
 {
-	vars->path = "./sprites/floor.xpm";
-	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y * 64);
+	e->path = "./sprites/floor.xpm";
+	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
 	return (0);
 }
 
-int	ft_delay(int *delay, int time)
+int	ft_delay(int *d, int time)
 {
-	if (*delay <= time)
+	if (*d <= time)
 	{
-		*delay += 1;
+		*d += 1;
 		return(1);
 	}
-	*delay = 0;
+	*d = 0;
 	return (0);
 }
 
-int	ft_animation(t_vars *vars, char *s2, int x, int y)
+int	ft_animation(t_env *e, char *s2, int x, int y)
 {
 	char	*s1;
 
@@ -50,17 +50,17 @@ int	ft_animation(t_vars *vars, char *s2, int x, int y)
 	if (!s1)
 		exit(1);
 	s1[0] = '\0';
-	ft_put_floor(vars, x, y);
+	ft_put_floor(e, x, y);
 	s1 = ft_strjoin(s1, s2);
-	s1 = ft_strjoin(s1, ft_itoa(vars->index));
-	vars->path = ft_strjoin(s1, ".xpm");
-	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y * 64);
+	s1 = ft_strjoin(s1, ft_itoa(e->index));
+	e->path = ft_strjoin(s1, ".xpm");
+	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
 	free(s1);
 	return (0);
 }
 
-int	ft_obj_animation(t_vars *vars)
+int	ft_obj_animation(t_env *e)
 {
 	int			j;
 	static int	i;
@@ -68,93 +68,91 @@ int	ft_obj_animation(t_vars *vars)
 	j = 0;
 	if (i > 5)
 		i = 0;
-	if (ft_delay(&vars->delay, 700) == 1)
+	if (ft_delay(&e->d, 700) == 1)
 		return (0);
-	vars->index = i;
-	while (j < vars->obj_count)
+	while (j < e->obj_c)
 	{
-		ft_animation(vars, "./sprites/coin", vars->obj_x[j], vars->obj_y[j]);
+		e->index = i;
+		ft_animation(e, "./sprites/coin", e->obj_x[j], e->obj_y[j]);
 		j++;
 	}
 	i++;
 	return (0);
 }
 
-int	ft_fade(t_vars *vars)
+int	ft_fade(t_env *e)
 {
 	static int	i;
 
-	if (ft_delay(&vars->delay3, 1000) == 1)
-	{
+	if (ft_delay(&e->d3, 1000) == 1)
 		return (1);
-	}
 	if (i < 7)
 	{
-		vars->index = i;
-		ft_animation(vars, "./sprites/pg_fade/pg_fade", vars->ex_x, vars->ex_y);
+		e->index = i;
+		ft_animation(e, "./sprites/pg_fade/pg_fade", e->ex_x, e->ex_y);
 		i++;
 		return (1);
 	}
-	ft_endgame(vars);
-	vars->pg_x += 1;
+	ft_endgame(e);
+	e->pg_x += 1;
 	i = 0;
 	return (0);
 }
 
-int	ft_move_pg(t_vars *vars, int y, int x)
+int	ft_move_pg(t_env *e, int y, int x)
 {
-	ft_put_floor(vars, vars->pg_x, vars->pg_y);
-	vars->pg_x += x;
-	vars->pg_y += y;
+	ft_put_floor(e, e->pg_x, e->pg_y);
+	e->pg_x += x;
+	e->pg_y += y;
 	if (x > 0)
 	{
-		ft_check_obj(vars);
-		if (vars->w.map[vars->pg_y][vars->pg_x] != 'E')
-			ft_put_floor(vars, vars->pg_x, vars->pg_y);
-		vars->path = "./sprites/player_dx.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-		ft_endgame(vars);
+		ft_check_obj(e);
+		if (e->w.m[e->pg_y][e->pg_x] != 'E')
+			ft_put_floor(e, e->pg_x, e->pg_y);
+		e->path = "./sprites/player_dx.xpm";
+		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+		mlx_put_image_to_window(e->mlx, e->win, e->img, e->pg_x * 64, e->pg_y * 64);
+		ft_endgame(e);
 	}
 	if (x < 0)
 	{
-		ft_check_obj(vars);
-		if (vars->w.map[vars->pg_y][vars->pg_x] != 'E')
-			ft_put_floor(vars, vars->pg_x, vars->pg_y);
-		vars->path = "./sprites/player_sx.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-		ft_endgame(vars);
+		ft_check_obj(e);
+		if (e->w.m[e->pg_y][e->pg_x] != 'E')
+			ft_put_floor(e, e->pg_x, e->pg_y);
+		e->path = "./sprites/player_sx.xpm";
+		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+		mlx_put_image_to_window(e->mlx, e->win, e->img, e->pg_x * 64, e->pg_y * 64);
+		ft_endgame(e);
 	}
 	if (y > 0)
 	{
-		ft_check_obj(vars);
-		if (vars->w.map[vars->pg_y][vars->pg_x] != 'E')
-			ft_put_floor(vars, vars->pg_x, vars->pg_y);
-		vars->path = "./sprites/player.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-		ft_endgame(vars);
+		ft_check_obj(e);
+		if (e->w.m[e->pg_y][e->pg_x] != 'E')
+			ft_put_floor(e, e->pg_x, e->pg_y);
+		e->path = "./sprites/player.xpm";
+		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+		mlx_put_image_to_window(e->mlx, e->win, e->img, e->pg_x * 64, e->pg_y * 64);
+		ft_endgame(e);
 	}
 	if (y < 0)
 	{
-		ft_check_obj(vars);
-		if (vars->w.map[vars->pg_y][vars->pg_x] != 'E')
-			ft_put_floor(vars, vars->pg_x, vars->pg_y);
-		vars->path = "./sprites/player_back.xpm";
-		vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, vars->pg_x * 64, vars->pg_y * 64);
-		ft_endgame(vars);
+		ft_check_obj(e);
+		if (e->w.m[e->pg_y][e->pg_x] != 'E')
+			ft_put_floor(e, e->pg_x, e->pg_y);
+		e->path = "./sprites/player_back.xpm";
+		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+		mlx_put_image_to_window(e->mlx, e->win, e->img, e->pg_x * 64, e->pg_y * 64);
+		ft_endgame(e);
 	}
 	return (0);
 }
 
-int	ft_move_count(t_vars *vars, t_win *map)
+int	ft_move_count(t_env *e, t_win *m)
 {
-	vars->moves += 1;
-	vars->path = "./sprites/wall3.xpm";
-	vars->img = mlx_xpm_file_to_image(vars->mlx, vars->path, &vars->img_x, &vars->img_y);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, (map->x - 1) * 64, 0);
-	mlx_string_put(vars->mlx, vars->win, (map->x - 1) * 64.5, 30, 0xFF00, ft_itoa(vars->moves));
+	e->mv += 1;
+	e->path = "./sprites/wall3.xpm";
+	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
+	mlx_put_image_to_window(e->mlx, e->win, e->img, (m->x - 1) * 64, 0);
+	mlx_string_put(e->mlx, e->win, (m->x - 1) * 64.5, 30, 0xFF00, ft_itoa(e->mv));
 	return (0);
 }
