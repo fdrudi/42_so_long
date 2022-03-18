@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/16 19:16:43 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/18 16:25:08 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 int	ft_hook_loop(t_vars *vars)
 {
-	ft_enemy_animation(vars);
 	ft_obj_animation(vars);
+	ft_enemy_patrol(vars);
+	ft_enemy_animation(vars);
 	if (vars->obj_count == 0)
 		ft_check_exit(vars);
 	if (vars->w.map[vars->pg_y][vars->pg_x] == 'E')
@@ -53,6 +54,7 @@ int	ft_start(t_vars *vars)
 	vars->delay2 = 0;
 	vars->delay3 = 0;
 	vars->delay4 = 0;
+	vars->delay5 = 0;
 	vars->index = 0;
 	vars->end = 0;
 	vars->moves = 0;
@@ -94,6 +96,7 @@ int	ft_reset(t_vars *vars, int n)
 	vars->delay2 = 0;
 	vars->delay3 = 0;
 	vars->delay4 = 0;
+	vars->delay5 = 0;
 	vars->index = 0;
 	vars->end = 0;
 	vars->moves = 0;
@@ -244,16 +247,18 @@ int	ft_key_release(int keycode, t_vars *vars)
 int	main(void)
 {
 	t_vars	vars;
+	int		i;
 
 	vars.mlx = mlx_init();
 	vars.next = 0;
 	vars.n.x_move = (int *) malloc (sizeof(int) * 1);
 	vars.n.y_move = (int *) malloc (sizeof(int) * 1);
-	vars.n.t_move = (int *) malloc (sizeof(int) * 1);
-	vars.n.j_move = (int *) malloc (sizeof(int) * 1);
 
 	ft_start(&vars);
-
+	vars.n.patr = (int *) malloc (sizeof(int) * vars.n.enm_count - 1);
+	i = -1;
+	while (++i <= vars.n.enm_count)
+		vars.n.patr[i] = -1;
 	mlx_loop_hook(vars.mlx, ft_hook_loop, &vars);
 	mlx_hook(vars.win, 17, 0, ft_close_win, &vars);
 	mlx_loop(vars.mlx);

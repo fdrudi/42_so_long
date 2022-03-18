@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/16 19:16:30 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/18 15:33:52 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ typedef struct s_enemy
 	int		*enm_y;
 	int		*x_move;
 	int		*y_move;
-	int		*t_move;
-	int		*j_move;
 	int		enm_count;
+	int		*patr;
 }				t_enemy;
 
 typedef struct s_vars
@@ -51,6 +50,7 @@ typedef struct s_vars
 	int		delay2;
 	int		delay3;
 	int		delay4;
+	int		delay5;
 	int		index;
 	int		moves;
 	int		img_x;
@@ -94,8 +94,9 @@ int	ft_put_floor(t_vars *vars, int x, int y);
 int	ft_put_floor_map(t_vars *vars, int x, int y);
 int	ft_fade(t_vars *vars);
 int	ft_enemy_animation(t_vars *vars);
-int	ft_check_enemy_moves(t_vars *vars, int i);
+int	ft_check_enemy_moves(t_vars *vars, int j);
 int	ft_close_win(t_vars *vars);
+int	ft_enemy_patrol(t_vars *vars);
 
 
 #endif
