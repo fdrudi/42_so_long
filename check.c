@@ -6,25 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:08 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 19:31:23 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/18 20:08:07 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-#include <stdio.h>
-
-int	ft_min_nbr(int a, int b)
-{
-	if (a < 0 || b < 0)
-		exit(1);
-	if (a < b)
-		return (a);
-	if (b < a)
-		return (b);
-	else
-		return (a);
-}
 
 int	ft_check_size_map(t_env *e)
 {
@@ -62,43 +48,29 @@ int	ft_check_size_map2(t_env *e)
 
 int	ft_endgame(t_env *e)
 {
+	int	x;
+	int	y;
+
 	if (e->w.m[e->pg_y][e->pg_x] == 'E')
 	{
 		if (ft_check_next_map(e) == 1)
 		{
 			e->end = 2;
 			ft_check_size_map2(e);
-			e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
-			mlx_put_image_to_window(e->mlx, e->win, e->img, (e->w.x / 3) * 64, (e->w.y / 3) * 64);
+			x = (e->w.x / 3) * 64;
+			y = (e->w.y / 3) * 64;
+			e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
+			mlx_put_image_to_window(e->mlx, e->win, e->img, x, y);
 		}
 		else
 		{
 			e->end = 1;
 			ft_check_size_map(e);
-			e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->img_x, &e->img_y);
-			mlx_put_image_to_window(e->mlx, e->win, e->img, ((e->w.x / 2) - (e->w.x / 3)) * 64, 64);
+			x = ((e->w.x / 2) - (e->w.x / 3)) * 64;
+			e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
+			mlx_put_image_to_window(e->mlx, e->win, e->img, x, 64);
 		}
 	}
-	return (0);
-}
-
-int	ft_check_exit(t_env *e)
-{
-	static int	i;
-
-	if (ft_delay(&e->d2, 1000) == 1)
-	{
-		return (0);
-	}
-	if (i < 4)
-	{
-		e->index = i;
-		ft_animation(e, "./sprites/door", e->ex_x, e->ex_y);
-		i++;
-		return (0);
-	}
-	e->obj_c = -1;
-	i = 0;
 	return (0);
 }
 
