@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:44:04 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 20:31:22 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 11:01:47 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,15 @@ int	ft_start(t_env *e)
 	e->w.y = ft_strlen_y(e->w.m);
 	e->w.x = (int) ft_strlen(e->w.m[0]);
 	close(e->w.fd);
+	if (e->n.n_c != 0)
+		free(e->n.patr);
 	ft_myinit(e);
 	e->win = mlx_new_window(e->mlx, e->w.x * 64, e->w.y * 64, "Window Test");
 	ft_make_map(e);
+	e->n.patr = (int *) malloc (sizeof(int) * e->n.n_c - 1);
+	int i = -1;
+	while (++i < e->n.n_c)
+		e->n.patr[i] = 0;
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
 	mlx_hook(e->win, 2, 1L << 0, ft_key_press, e);

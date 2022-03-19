@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 19:46:25 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 10:21:03 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,17 +139,17 @@ int	ft_key_press(int key, t_env *e)
 int	main(void)
 {
 	t_env	e;
-	int		i;
+	// int		i;
 
 	e.mlx = mlx_init();
 	e.next = 0;
 	e.n.x_m = (int *) malloc (sizeof(int) * 1);
 	e.n.y_m = (int *) malloc (sizeof(int) * 1);
 	ft_start(&e);
-	e.n.patr = (int *) malloc (sizeof(int) * e.n.n_c - 1);
-	i = -1;
-	while (++i <= e.n.n_c)
-		e.n.patr[i] = -1;
+	// e.n.patr = (int *) malloc (sizeof(int) * e.n.n_c - 1);
+	// i = -1;
+	// while (++i <= e.n.n_c)
+	// 	e.n.patr[i] = -1;
 	mlx_loop_hook(e.mlx, ft_hook_loop, &e);
 	mlx_hook(e.win, 17, 0, ft_close_win, &e);
 	mlx_loop(e.mlx);

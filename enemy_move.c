@@ -6,11 +6,27 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:26:26 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 19:37:11 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 11:36:07 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	ft_check_cond(t_env *e, int y, int x)
+{
+	int	j;
+
+	j = -1;
+	if (e->w.m[y][x] == '1' || e->w.m[y][x] == 'E' || e->w.m[y][x] == 'C')
+		return (1);
+	else
+	{
+		while (++j < e->n.n_c)
+			if (x == e->n.n_x[j] && y == e->n.n_y[j])
+				return (1);
+	}
+	return (0);
+}
 
 int	ft_check_pg(t_env *e, int j, int i)
 {
@@ -107,7 +123,6 @@ int	ft_check_enemy_moves_b(t_env *e, int j)
 		else if (e->w.m[e->n.n_y[j] + 1][e->n.n_x[j]] != '1')
 				e->n.y_m[j] = 1;
 		e->n.x_m[j] = 0;
-
 	}
 	else if (x == 0)
 	{
@@ -202,25 +217,25 @@ int	ft_enemy_dir(t_env *e, int j, int i)
 {
 	if (e->n.y_m[j] == -1)
 	{
-		if (e->w.m[e->n.n_y[j] - 1][e->n.n_x[j]] == '1' && i == 1)
+		if (i == 1 && ft_check_cond(e, e->n.n_y[j] - 1, e->n.n_x[j]) == 1)
 			return (1);
 		ft_enemy_move(e, j, i);
 	}
 	else if (e->n.y_m[j] == 1)
 	{
-		if (e->w.m[e->n.n_y[j] + 1][e->n.n_x[j]] == '1' && i == 1)
+		if (i == 1 && ft_check_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 1)
 			return (1);
 		ft_enemy_move(e, j, i);
 	}
 	else if (e->n.x_m[j] == -1)
 	{
-		if (e->w.m[e->n.n_y[j]][e->n.n_x[j] - 1] == '1' && i == 1)
+		if (i == 1 && ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 1)
 			return (1);
 		ft_enemy_move(e, j, i);
 	}
 	else if (e->n.x_m[j] == 1)
 	{
-		if (e->w.m[e->n.n_y[j]][e->n.n_x[j] + 1] == '1' && i == 1)
+		if (i == 1 && ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] + 1) == 1)
 			return (1);
 		ft_enemy_move(e, j, i);
 	}
@@ -248,7 +263,7 @@ int	ft_enemy_animation(t_env *e)
 			{
 				ft_check_enemy_moves_b(e, j);
 				if (ft_enemy_dir(e, j, i) == 1)
-					e->n.patr[j] = -1;
+					e->n.patr[j] = 0;
 			}
 		}
 		j++;
@@ -261,28 +276,26 @@ int	ft_enemy_patrol(t_env *e)
 {
 	int			j;
 	static int	i;
-	static int	x;
 
-	j = 0;
+	j = -1;
 	if (i > 4)
 		i = 0;
 	if (ft_delay(&e->d5, 2000) == 1)
 		return (0);
-	while (j < e->n.n_c)
+	while (++j < e->n.n_c)
 	{
 		e->index = i;
 		ft_check_pg(e, j, i);
-		if (e->n.patr[j] == -1)
+		if (e->n.patr[j] == -1 || e->n.patr[j] == 0)
 		{
-			if (i == 0 && x == 0)
+			if (i == 0 && e->n.patr[j] == 0)
 			{
 				ft_check_enemy_patr(e, j);
-				x = 1;
+				e->n.patr[j] = -1;
 			}
 			if (ft_enemy_dir(e, j, i) == 1)
 				ft_check_enemy_patr(e, j);
 		}
-		j++;
 	}
 	i++;
 	return (0);

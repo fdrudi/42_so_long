@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:08 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 20:08:07 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 11:23:09 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	ft_check_obj(t_env *e)
 			e->obj_x = ft_int_trim(e->obj_x, i, e->obj_c);
 			e->obj_y = ft_int_trim(e->obj_y, i, e->obj_c);
 			e->obj_c -= 1;
+			// e->w.m[e->obj_y[i]][e->obj_x[i]] = 0;
 			return (0);
 		}
 		i++;
