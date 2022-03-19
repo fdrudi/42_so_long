@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:08 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 11:23:09 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 15:20:31 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,20 @@ int	ft_check_next_map(t_env *e)
 	int		fd;
 
 	fd = 0;
-	s1 = (char *) malloc (sizeof(char) * 1);
-	if (!s1)
-		exit(1);
-	s1[0] = '\0';
-	s1 = ft_strjoin(s1, "./map");
-	s1 = ft_strjoin(s1, ft_itoa(e->next + 1));
-	s1 = ft_strjoin(s1, ".ber");
-	fd = open(s1, O_RDONLY);
-	free(s1);
+	if (e->w.ac == 1)
+	{
+		s1 = (char *) malloc (sizeof(char) * 1);
+		if (!s1)
+			exit(1);
+		s1[0] = '\0';
+		s1 = ft_strjoin(s1, "./map");
+		s1 = ft_strjoin(s1, ft_itoa(e->next + 1));
+		s1 = ft_strjoin(s1, ".ber");
+		fd = open(s1, O_RDONLY);
+		free(s1);
+	}
+	else
+		fd = open(e->w.av[e->next + 2], O_RDONLY);
 	if (fd == -1)
 		return (1);
 	return (0);

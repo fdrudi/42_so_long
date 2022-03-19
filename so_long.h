@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 10:51:15 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 18:42:01 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_win
 	int		y;
 	int		fd;
 	char	**m;
+	char	**av;
+	int		ac;
 }				t_win;
 
 typedef struct s_enemy
@@ -52,6 +54,7 @@ typedef struct s_env
 	int		d3;
 	int		d4;
 	int		d5;
+	int		d6;
 	int		index;
 	int		mv;
 	int		i_x;
@@ -98,5 +101,13 @@ int		ft_close_win(t_env *e);
 int		ft_enemy_patrol(t_env *e);
 int		ft_check_pg(t_env *e, int j, int i);
 int		ft_min_nbr(int a, int b);
+int		ft_check_cond(t_env *e, int y, int x, int j);
+int		ft_check_enemy_patr(t_env *e, int j);
+int		ft_check_enemy_moves_b(t_env *e, int j);
+int		ft_start_b(t_env *e);
+int		ft_reset_b(t_env *e, int n);
+int		ft_enemy_attack(t_env *e);
+int		ft_animation_b(t_env *e, char *s2, int x, int y);
+int		ft_check_attack(t_env *e, int j);
 
 #endif

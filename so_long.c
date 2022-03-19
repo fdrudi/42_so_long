@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 10:21:03 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 18:24:42 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 int	ft_hook_loop(t_env *e)
 {
 	ft_obj_animation(e);
-	ft_enemy_patrol(e);
-	ft_enemy_animation(e);
+	if (e->end == 0)
+	{
+		ft_enemy_patrol(e);
+		ft_enemy_animation(e);
+		ft_enemy_attack(e);
+	}
 	if (e->obj_c == 0)
 		ft_check_exit(e);
 	if (e->w.m[e->pg_y][e->pg_x] == 'E')
@@ -61,7 +65,10 @@ int	ft_key_press(int key, t_env *e)
 		ft_close_win(e);
 	if (key == 15)
 	{
-		ft_reset(e, e->next);
+		if (e->w.ac >= 1)
+			ft_reset_b(e, e->next);
+		else
+			ft_reset(e, e->next);
 		return (1);
 	}
 	if (e->end == 1)
@@ -136,20 +143,39 @@ int	ft_key_press(int key, t_env *e)
 // 	return (0);
 // }
 
-int	main(void)
+int	ft_set_av_ac(t_env *e, int argc, char **argv)
+{
+	int	i;
+
+	i = 0;
+	e->w.ac = argc;
+	e->w.av = (char **) malloc (sizeof(char) * argc);
+	if (!e->w.av)
+		exit(1);
+	while (i < argc)
+	{
+		e->w.av[i] = ft_substr(argv[i], 0, ft_strlen(argv[i]));
+		i++;
+	}
+	e->w.av[i] = 0;
+	return (0);
+}
+
+int	main(int argc, char *argv[])
 {
 	t_env	e;
-	// int		i;
 
 	e.mlx = mlx_init();
 	e.next = 0;
 	e.n.x_m = (int *) malloc (sizeof(int) * 1);
 	e.n.y_m = (int *) malloc (sizeof(int) * 1);
-	ft_start(&e);
-	// e.n.patr = (int *) malloc (sizeof(int) * e.n.n_c - 1);
-	// i = -1;
-	// while (++i <= e.n.n_c)
-	// 	e.n.patr[i] = -1;
+	if (argc > 1)
+	{
+		ft_set_av_ac(&e, argc, argv);
+		ft_start_b(&e);
+	}
+	else
+		ft_start(&e);
 	mlx_loop_hook(e.mlx, ft_hook_loop, &e);
 	mlx_hook(e.win, 17, 0, ft_close_win, &e);
 	mlx_loop(e.mlx);

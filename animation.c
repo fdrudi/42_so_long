@@ -6,11 +6,28 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 20:06:32 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 18:19:40 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	ft_animation_b(t_env *e, char *s2, int x, int y)
+{
+	char	*s1;
+
+	s1 = (char *) malloc (sizeof(char) * 1);
+	if (!s1)
+		exit(1);
+	s1[0] = '\0';
+	s1 = ft_strjoin(s1, s2);
+	s1 = ft_strjoin(s1, ft_itoa(e->index));
+	e->path = ft_strjoin(s1, ".xpm");
+	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
+	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
+	free(s1);
+	return (0);
+}
 
 int	ft_animation(t_env *e, char *s2, int x, int y)
 {
@@ -38,7 +55,7 @@ int	ft_obj_animation(t_env *e)
 	j = 0;
 	if (i > 5)
 		i = 0;
-	if (ft_delay(&e->d, 700) == 1)
+	if (ft_delay(&e->d, 1000) == 1)
 		return (0);
 	while (j < e->obj_c)
 	{

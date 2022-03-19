@@ -6,7 +6,7 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/18 20:00:58 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/19 18:26:29 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME		=	so_long
 
 SRC			=	so_long.c so_long_utils.c map_utils.c check.c animation.c\
 				enemy_move.c set_env.c close.c animation_utils.c\
+				enemy_move_utils.c enemy_move_check.c enemy_attack.c\
 
 OBJ			=	$(SRC:.c=.o)
 

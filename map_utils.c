@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 11:02:41 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/19 13:36:32 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_enm_ext(t_env *e, int j, int i)
 	}
 	if (e->w.m[i][j] == 'N')
 	{
-		e->path = "./sprites/enemy/enemy_back0.xpm";
+		e->path = "./sprites/enm/enm_back0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 		if (e->n.n_c == 0)
@@ -115,3 +115,19 @@ void	ft_make_map(t_env *e)
 		}
 	}
 }
+
+// int	ft_check_map(t_env *e)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = -1;
+// 	while (++i < e->w.y)
+// 	{
+// 		j = -1;
+// 		while (++j < e->w.x)
+// 		{
+
+// 		}
+// 	}
+// }
