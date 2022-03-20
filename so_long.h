@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 18:42:01 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/20 15:43:19 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_enemy
 	int		*y_m;
 	int		n_c;
 	int		*patr;
+	int		*i;
 }				t_enemy;
 
 typedef struct s_env
@@ -99,9 +100,9 @@ int		ft_enemy_animation(t_env *e);
 int		ft_check_enemy_moves(t_env *e, int j);
 int		ft_close_win(t_env *e);
 int		ft_enemy_patrol(t_env *e);
-int		ft_check_pg(t_env *e, int j, int i);
+int		ft_check_pg(t_env *e, int j);
 int		ft_min_nbr(int a, int b);
-int		ft_check_cond(t_env *e, int y, int x, int j);
+int		ft_check_cond(t_env *e, int y, int x);
 int		ft_check_enemy_patr(t_env *e, int j);
 int		ft_check_enemy_moves_b(t_env *e, int j);
 int		ft_start_b(t_env *e);

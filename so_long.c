@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 18:24:42 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/20 16:57:54 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_key_press(int key, t_env *e)
 		ft_close_win(e);
 	if (key == 15)
 	{
-		if (e->w.ac >= 1)
+		if (e->w.ac > 1)
 			ft_reset_b(e, e->next);
 		else
 			ft_reset(e, e->next);
@@ -175,7 +175,10 @@ int	main(int argc, char *argv[])
 		ft_start_b(&e);
 	}
 	else
+	{
+		e.w.ac = 1;
 		ft_start(&e);
+	}
 	mlx_loop_hook(e.mlx, ft_hook_loop, &e);
 	mlx_hook(e.win, 17, 0, ft_close_win, &e);
 	mlx_loop(e.mlx);

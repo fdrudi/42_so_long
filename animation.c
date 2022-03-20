@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 18:19:40 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/20 18:38:05 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_obj_animation(t_env *e)
 	if (i > 5)
 		i = 0;
 	if (ft_delay(&e->d, 1000) == 1)
-		return (0);
+		return (1);
 	while (j < e->obj_c)
 	{
 		e->index = i;
@@ -88,21 +88,29 @@ int	ft_fade(t_env *e)
 
 int	ft_move_pg_help(t_env *e, char *s)
 {
-	ft_check_obj(e);
 	if (e->w.m[e->pg_y][e->pg_x] != 'E')
+	{
+		e->w.m[e->pg_y][e->pg_x] = 'P';
+		ft_check_obj(e);
 		ft_put_floor(e, e->pg_x, e->pg_y);
+	}
 	e->img = mlx_xpm_file_to_image(e->mlx, s, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, e->pg_x * 64, e->pg_y * 64);
-	ft_endgame(e);
 	return (0);
 }
 
 int	ft_move_pg(t_env *e, int y, int x)
 {
 	ft_put_floor(e, e->pg_x, e->pg_y);
+	e->w.m[e->pg_y][e->pg_x] = '0';
 	e->pg_x += x;
 	e->pg_y += y;
-	if (x > 0)
+	if (e->w.m[e->pg_y][e->pg_x] == 'N')
+	{
+		e->end = -1;
+		return (1);
+	}
+	else if (x > 0)
 		ft_move_pg_help(e, "./sprites/player_dx.xpm");
 	else if (x < 0)
 		ft_move_pg_help(e, "./sprites/player_sx.xpm");

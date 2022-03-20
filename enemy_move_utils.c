@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:40:20 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 18:39:12 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/20 18:07:04 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 int	ft_check_attack(t_env *e, int j)
 {
-	if (e->n.n_y[j] - 1 == e->pg_y && e->n.n_x[j] == e->pg_x)
+	if (e->w.m[e->n.n_y[j] - 1][e->n.n_x[j]] == e->w.m[e->pg_y][e->pg_x])
 	{
 		e->n.y_m[j] = -1;
 		e->n.x_m[j] = 0;
 		return (1);
 	}
-	else if (e->n.n_y[j] + 1 == e->pg_y && e->n.n_x[j] == e->pg_x)
+	else if (e->w.m[e->n.n_y[j] + 1][e->n.n_x[j]] == e->w.m[e->pg_y][e->pg_x])
 	{
 		e->n.y_m[j] = 1;
 		e->n.x_m[j] = 0;
 		return (1);
 	}
-	else if (e->n.n_y[j] == e->pg_y && e->n.n_x[j] - 1 == e->pg_x)
+	else if (e->w.m[e->n.n_y[j]][e->n.n_x[j] - 1] == e->w.m[e->pg_y][e->pg_x])
 	{
 		e->n.x_m[j] = -1;
 		e->n.y_m[j] = 0;
 		return (1);
 	}
-	else if (e->n.n_y[j] == e->pg_y && e->n.n_x[j] + 1 == e->pg_x)
+	else if (e->w.m[e->n.n_y[j]][e->n.n_x[j] + 1] == e->w.m[e->pg_y][e->pg_x])
 	{
 		e->n.x_m[j] = 1;
 		e->n.y_m[j] = 0;
@@ -41,35 +41,22 @@ int	ft_check_attack(t_env *e, int j)
 	return (0);
 }
 
-int	ft_check_cond(t_env *e, int y, int x, int j)
+int	ft_check_cond(t_env *e, int y, int x)
 {
-	int	i;
-
-	i = -1;
-	if (e->w.m[y][x] == '1' || e->w.m[y][x] == 'E' || e->w.m[y][x] == 'C')
+	if (e->w.m[y][x] == '1' || e->w.m[y][x] == 'E' || e->w.m[y][x] == 'C'
+		|| e->w.m[y][x] == 'N')
 		return (1);
-	else
-	{
-		while (++i < e->n.n_c)
-			if (x == e->n.n_x[j] && y == e->n.n_y[j])
-				return (1);
-	}
-	// if (ft_check_attack(e, j) == 1)
-	// {
-	// 	e->n.patr[j] = 2;
-	// 	return (1);
-	// }
 	return (0);
 }
 
-int	ft_check_pg(t_env *e, int j, int i)
+int	ft_check_pg(t_env *e, int j)
 {
 	int	x;
 	int	y;
 	int	x1;
 	int	y1;
 
-	if (i == 0)
+	if (e->n.i[j] == 0)
 	{
 		x = e->pg_x - e->n.n_x[j];
 		y = e->pg_y - e->n.n_y[j];
@@ -79,11 +66,11 @@ int	ft_check_pg(t_env *e, int j, int i)
 			x1 *= -1;
 		if (y1 < 0)
 			y1 *= -1;
-		// if (x == 0 && y == 0)
-		// {
-		// 	e->end = -1;
-		// 	// ft_close_win(e);
-		// }
+		if (x == 0 && y == 0)
+		{
+			e->end = -1;
+			// ft_close_win(e);
+		}
 		if (x1 < 5 && y1 < 5)
 			e->n.patr[j] = 1;
 	}
@@ -92,22 +79,22 @@ int	ft_check_pg(t_env *e, int j, int i)
 
 int	ft_check_enemy_patr(t_env *e, int j)
 {
-	if (ft_check_cond(e, e->n.n_y[j] - 1, e->n.n_x[j], j) == 0)
+	if (ft_check_cond(e, e->n.n_y[j] - 1, e->n.n_x[j]) == 0)
 	{
 		e->n.y_m[j] = -1;
 		e->n.x_m[j] = 0;
 	}
-	else if (ft_check_cond(e, e->n.n_y[j] + 1, e->n.n_x[j], j) == 0)
+	else if (ft_check_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
 	{
 		e->n.y_m[j] = 1;
 		e->n.x_m[j] = 0;
 	}
-	else if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] - 1, j) == 0)
+	else if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 0)
 	{
 		e->n.x_m[j] = -1;
 		e->n.y_m[j] = 0;
 	}
-	else if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] + 1, j) == 0)
+	else if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] + 1) == 0)
 	{
 		e->n.x_m[j] = 1;
 		e->n.y_m[j] = 0;

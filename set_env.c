@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:44:04 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 18:24:47 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/20 16:57:41 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,15 @@ int	ft_start_b(t_env *e)
 	e->win = mlx_new_window(e->mlx, e->w.x * 64, e->w.y * 64, "Window Test");
 	ft_make_map(e);
 	e->n.patr = (int *) malloc (sizeof(int) * e->n.n_c - 1);
+	e->n.i = (int *) malloc (sizeof(int) * e->n.n_c - 1);
+	if (e->n.patr == NULL || e->n.i == NULL)
+		exit(1);
 	i = -1;
-	while (++i < e->n.n_c)
+	while (++i <= e->n.n_c)
+	{
 		e->n.patr[i] = 0;
+		e->n.i[i] = 0;
+	}
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
 	mlx_hook(e->win, 2, 1L << 0, ft_key_press, e);
@@ -80,14 +86,23 @@ int	ft_start(t_env *e)
 	e->w.x = (int) ft_strlen(e->w.m[0]);
 	close(e->w.fd);
 	if (e->n.n_c != 0)
+	{
 		free(e->n.patr);
+		free(e->n.i);
+	}
 	ft_myinit(e);
 	e->win = mlx_new_window(e->mlx, e->w.x * 64, e->w.y * 64, "Window Test");
 	ft_make_map(e);
 	e->n.patr = (int *) malloc (sizeof(int) * e->n.n_c - 1);
+	e->n.i = (int *) malloc (sizeof(int) * e->n.n_c - 1);
+	if (e->n.patr == NULL || e->n.i == NULL)
+		exit(1);
 	i = -1;
-	while (++i < e->n.n_c)
+	while (++i <= e->n.n_c)
+	{
 		e->n.patr[i] = 0;
+		e->n.i[i] = 0;
+	}
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
 	mlx_hook(e->win, 2, 1L << 0, ft_key_press, e);
@@ -109,10 +124,12 @@ int	ft_reset_b(t_env *e, int n)
 	ft_make_map(e);
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
-	e->n.patr = (int *) malloc (sizeof(int) * e->n.n_c - 1);
 	i = -1;
 	while (++i <= e->n.n_c)
-		e->n.patr[i] = -1;
+	{
+		e->n.patr[i] = 0;
+		e->n.i[i] = 0;
+	}
 	return (0);
 }
 
@@ -138,9 +155,11 @@ int	ft_reset(t_env *e, int n)
 	ft_make_map(e);
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 20, 0xFFFFFF, "MOVES");
 	mlx_string_put(e->mlx, e->win, (e->w.x - 2) * 64, 40, 0xFFFFFF, "COUNT");
-	e->n.patr = (int *) malloc (sizeof(int) * e->n.n_c - 1);
 	i = -1;
 	while (++i <= e->n.n_c)
-		e->n.patr[i] = -1;
+	{
+		e->n.patr[i] = 0;
+		e->n.i[i] = 0;
+	}
 	return (0);
 }
