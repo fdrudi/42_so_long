@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/20 16:57:54 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/20 19:00:40 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ int	ft_key_press(int key, t_env *e)
 		ft_close_win(e);
 	if (key == 15)
 	{
+		if (e->end == 2)
+		{
+			e->next = 0;
+			ft_next_level(e);
+			return (0);
+		}
 		if (e->w.ac > 1)
 			ft_reset_b(e, e->next);
 		else
