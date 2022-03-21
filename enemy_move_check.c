@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:43:32 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/20 18:09:21 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 17:29:21 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	ft_check_enemy_help(t_env *e, int i, int j, int a)
 {
 	if (a < 0)
 	{
-		if (i < 0 && ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 0)
+		if (i < 0 && ft_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 0)
 			e->n.x_m[j] = -1;
-		else if (i > 0 && ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] + 1) == 0)
+		else if (i > 0 && ft_cond(e, e->n.n_y[j], e->n.n_x[j] + 1) == 0)
 			e->n.x_m[j] = 1;
 		else
 			e->n.x_m[j] = 0;
@@ -26,9 +26,9 @@ int	ft_check_enemy_help(t_env *e, int i, int j, int a)
 	}
 	else if (a > 0)
 	{
-		if (i < 0 && ft_check_cond(e, e->n.n_y[j] - 1, e->n.n_x[j]) == 0)
+		if (i < 0 && ft_cond(e, e->n.n_y[j] - 1, e->n.n_x[j]) == 0)
 			e->n.y_m[j] = -1;
-		else if (i > 0 && ft_check_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
+		else if (i > 0 && ft_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
 			e->n.y_m[j] = 1;
 		else
 			e->n.y_m[j] = 0;
@@ -41,9 +41,9 @@ int	ft_check_enemy_help_b(t_env *e, int j, int a)
 {
 	if (a < 0)
 	{
-		if (ft_check_cond(e, e->n.n_y[j] - 1, e->n.n_x[j]) == 0)
+		if (ft_cond(e, e->n.n_y[j] - 1, e->n.n_x[j]) == 0)
 			e->n.y_m[j] = -1;
-		else if (ft_check_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
+		else if (ft_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
 			e->n.y_m[j] = 1;
 		else
 			e->n.y_m[j] = 0;
@@ -51,9 +51,9 @@ int	ft_check_enemy_help_b(t_env *e, int j, int a)
 	}
 	else if (a > 0)
 	{
-		if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 0)
+		if (ft_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 0)
 			e->n.x_m[j] = -1;
-		else if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] + 1) == 0)
+		else if (ft_cond(e, e->n.n_y[j], e->n.n_x[j] + 1) == 0)
 			e->n.x_m[j] = 1;
 		else
 			e->n.x_m[j] = 0;
@@ -78,10 +78,7 @@ int	ft_check_enemy_moves(t_env *e, int j)
 	if (y1 < 0)
 		y1 *= -1;
 	if (x == 0 && y == 0)
-	{
 		e->end = -1;
-		// ft_close_win(e);
-	}
 	if (x1 > y1)
 		ft_check_enemy_help(e, x, j, -1);
 	else if (y1 > x1)
@@ -105,10 +102,7 @@ int	ft_check_enemy_moves_b(t_env *e, int j)
 	if (y1 < 0)
 		y1 *= -1;
 	if (x == 0 && y == 0)
-	{
 		e->end = -1;
-		// ft_close_win(e);
-	}
 	if (x1 < y1 && x != 0)
 		ft_check_enemy_help(e, x, j, -1);
 	else if (y1 < x1 && y != 0)

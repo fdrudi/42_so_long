@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 15:36:34 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 17:41:27 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_key_press(int key, t_env *e);
 int		ft_key_release(int key, t_env *e);
 int		ft_move_pg(t_env *e, int y, int x);
 int		ft_endgame(t_env *e);
-int		ft_reset(t_env *e, int n);
+int		ft_reset(t_env *e);
 int		ft_next_level(t_env *e);
 void	ft_exit(t_env *e);
 void	ft_free_matrix(char **matrix);
@@ -91,7 +91,7 @@ int		ft_strlen_y(char **s);
 int		ft_hook_loop(t_env *e);
 int		ft_obj_animation(t_env *e);
 int		ft_check_exit(t_env *e);
-int		ft_animation(t_env *e, char *s2, int x, int y);
+int		ft_animate(t_env *e, char *s2, int x, int y);
 int		ft_delay(int *delay, int time);
 int		ft_put_floor(t_env *e, int x, int y);
 int		ft_put_floor_map(t_env *e, int x, int y);
@@ -102,17 +102,30 @@ int		ft_close_win(t_env *e);
 int		ft_enemy_patrol(t_env *e);
 int		ft_check_pg(t_env *e, int j);
 int		ft_min_nbr(int a, int b);
-int		ft_check_cond(t_env *e, int y, int x);
+int		ft_cond(t_env *e, int y, int x);
 int		ft_check_enemy_patr(t_env *e, int j);
 int		ft_check_enemy_moves_b(t_env *e, int j);
 int		ft_start_b(t_env *e);
-int		ft_reset_b(t_env *e, int n);
+int		ft_reset_b(t_env *e);
 int		ft_enemy_attack(t_env *e);
-int		ft_animation_b(t_env *e, char *s2, int x, int y);
+int		ft_animate_b(t_env *e, char *s2, int x, int y);
 int		ft_check_attack(t_env *e, int j);
 void	ft_error(t_env *e, char *s);
 void	ft_myinit(t_env *e);
+void	ft_myinit2(t_env *e);
+void	ft_myinit3(t_env *e);
 void	free_matrix(char **matrix);
+void	ft_map_path(t_env *e);
+void	ft_check_map(t_env *e);
 
+int		ft_enemy_move_a(t_env *e, int j);
+int		ft_enemy_move_d(t_env *e, int j);
+int		ft_enemy_move_w(t_env *e, int j);
+int		ft_enemy_move_s(t_env *e, int j);
+
+void	ft_enemy_move_atk_w(t_env *e, int j, int y, int x);
+void	ft_enemy_move_atk_s(t_env *e, int j, int y, int x);
+void	ft_enemy_move_atk_a(t_env *e, int j, int y, int x);
+void	ft_enemy_move_atk_d(t_env *e, int j, int y, int x);
 
 #endif

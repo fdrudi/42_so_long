@@ -6,15 +6,17 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/21 13:31:31 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/21 17:43:48 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	so_long
 
 SRC			=	so_long.c so_long_utils.c map_utils.c check.c animation.c\
-				enemy_move.c set_env.c close.c animation_utils.c\
+				enemy_move.c set_env.c close.c animation_utils.c myinit.c\
 				enemy_move_utils.c enemy_move_check.c enemy_attack.c\
+				map_utils2.c enemy_moveset.c enemy_attack_moveset.c\
+				pg_move.c\
 
 OBJ			=	$(SRC:.c=.o)
 

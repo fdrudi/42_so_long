@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:59:52 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 15:01:40 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 17:16:43 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_delay(int *d, int time)
 
 int	ft_move_count(t_env *e, t_win *m)
 {
-	int	x;
+	int		x;
 	char	*c;
 
 	x = (m->x - 1) * 64.5;
@@ -67,7 +67,7 @@ int	ft_check_exit(t_env *e)
 	if (i < 4)
 	{
 		e->index = i;
-		ft_animation(e, "./sprites/door", e->ex_x, e->ex_y);
+		ft_animate(e, "./sprites/door", e->ex_x, e->ex_y);
 		i++;
 		return (0);
 	}

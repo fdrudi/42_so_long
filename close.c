@@ -6,21 +6,28 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:45:56 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 16:19:17 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 17:44:45 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	ft_error(t_env *e, char *s)
+{
+	ft_putstr_fd(s, 2);
+	ft_exit(e);
+	exit(1);
+}
+
 int	ft_close_win(t_env *e)
 {
 	mlx_destroy_window(e->mlx, e->win);
 	ft_exit(e);
-	ft_free_matrix(e->w.av);
-	free(e->img);
-	free(e->win);
-	free(e->mlx);
-	free(e->path);
+	// ft_free_matrix(e->w.av);
+	// free(e->img);
+	// free(e->win);
+	// free(e->mlx);
+	// free(e->path);
 	exit(0);
 	return (0);
 }

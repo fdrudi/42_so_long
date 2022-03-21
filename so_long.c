@@ -6,18 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 15:36:01 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 17:44:37 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	ft_error(t_env *e, char *s)
-{
-	ft_putstr_fd(s, 2);
-	ft_exit(e);
-	exit(1);
-}
 
 int	ft_hook_loop(t_env *e)
 {
@@ -71,30 +64,27 @@ int	ft_key_press(int key, t_env *e)
 {
 	if (key == 53)
 		ft_close_win(e);
-	if (key == 15)
+	else if (key == 15)
 	{
 		if (e->end == 2)
 		{
 			e->next = 0;
 			ft_next_level(e);
-			return (0);
 		}
-		if (e->w.ac > 1)
-			ft_reset_b(e, e->next);
+		else if (e->w.ac > 1)
+			ft_reset_b(e);
 		else
-			ft_reset(e, e->next);
-		return (1);
+			ft_reset(e);
 	}
-	if (e->end == 1)
+	else if (e->end == 1)
 	{
 		if (key == 36)
 		{
 			e->next += 1;
 			ft_next_level(e);
-			return (0);
 		}
 	}
-	if (e->end == 0)
+	else if (e->end == 0)
 		ft_key_act(e, key);
 	return (0);
 }

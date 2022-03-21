@@ -6,11 +6,19 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:40:20 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 14:47:52 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 17:28:46 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	ft_cond(t_env *e, int y, int x)
+{
+	if (e->w.m[y][x] == '1' || e->w.m[y][x] == 'E' || e->w.m[y][x] == 'C'
+		|| e->w.m[y][x] == 'N')
+		return (1);
+	return (0);
+}
 
 int	ft_check_attack(t_env *e, int j)
 {
@@ -41,14 +49,6 @@ int	ft_check_attack(t_env *e, int j)
 	return (0);
 }
 
-int	ft_check_cond(t_env *e, int y, int x)
-{
-	if (e->w.m[y][x] == '1' || e->w.m[y][x] == 'E' || e->w.m[y][x] == 'C'
-		|| e->w.m[y][x] == 'N')
-		return (1);
-	return (0);
-}
-
 int	ft_check_pg(t_env *e, int j)
 {
 	int	x;
@@ -76,22 +76,22 @@ int	ft_check_pg(t_env *e, int j)
 
 int	ft_check_enemy_patr(t_env *e, int j)
 {
-	if (ft_check_cond(e, e->n.n_y[j] - 1, e->n.n_x[j]) == 0)
+	if (ft_cond(e, e->n.n_y[j] - 1, e->n.n_x[j]) == 0)
 	{
 		e->n.y_m[j] = -1;
 		e->n.x_m[j] = 0;
 	}
-	else if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 0)
+	else if (ft_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 0)
 	{
 		e->n.x_m[j] = -1;
 		e->n.y_m[j] = 0;
 	}
-	else if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] + 1) == 0)
+	else if (ft_cond(e, e->n.n_y[j], e->n.n_x[j] + 1) == 0)
 	{
 		e->n.x_m[j] = 1;
 		e->n.y_m[j] = 0;
 	}
-	else if (ft_check_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
+	else if (ft_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
 	{
 		e->n.y_m[j] = 1;
 		e->n.x_m[j] = 0;
