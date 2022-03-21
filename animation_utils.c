@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:59:52 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/18 20:08:44 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 15:01:40 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,16 @@ int	ft_delay(int *d, int time)
 int	ft_move_count(t_env *e, t_win *m)
 {
 	int	x;
+	char	*c;
 
 	x = (m->x - 1) * 64.5;
 	e->mv += 1;
 	e->path = "./sprites/wall3.xpm";
+	c = ft_itoa(e->mv);
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, (m->x - 1) * 64, 0);
-	mlx_string_put(e->mlx, e->win, x, 30, 0xFF00, ft_itoa(e->mv));
+	mlx_string_put(e->mlx, e->win, x, 30, 0xFF00, c);
+	free(c);
 	return (0);
 }
 

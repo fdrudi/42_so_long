@@ -6,7 +6,7 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/20 11:00:05 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/21 13:31:31 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ MLX			=	./libmlx.dylib
 
 LIBFT		=	libft/libft.a
 
-CC			=	gcc
+CC			=	gcc #-fsanitize=address
 
 RM			=	rm -f
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	#-Wall -Wextra -Werror
 
 $(NAME):	$(OBJ)
 			make -C ./libft

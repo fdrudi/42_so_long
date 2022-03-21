@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:40:20 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/20 18:07:04 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 14:47:52 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ int	ft_check_pg(t_env *e, int j)
 		if (y1 < 0)
 			y1 *= -1;
 		if (x == 0 && y == 0)
-		{
 			e->end = -1;
-			// ft_close_win(e);
-		}
 		if (x1 < 5 && y1 < 5)
 			e->n.patr[j] = 1;
 	}
@@ -84,11 +81,6 @@ int	ft_check_enemy_patr(t_env *e, int j)
 		e->n.y_m[j] = -1;
 		e->n.x_m[j] = 0;
 	}
-	else if (ft_check_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
-	{
-		e->n.y_m[j] = 1;
-		e->n.x_m[j] = 0;
-	}
 	else if (ft_check_cond(e, e->n.n_y[j], e->n.n_x[j] - 1) == 0)
 	{
 		e->n.x_m[j] = -1;
@@ -98,6 +90,11 @@ int	ft_check_enemy_patr(t_env *e, int j)
 	{
 		e->n.x_m[j] = 1;
 		e->n.y_m[j] = 0;
+	}
+	else if (ft_check_cond(e, e->n.n_y[j] + 1, e->n.n_x[j]) == 0)
+	{
+		e->n.y_m[j] = 1;
+		e->n.x_m[j] = 0;
 	}
 	return (0);
 }

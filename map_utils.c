@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/19 13:36:32 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 15:16:17 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,69 @@ void	ft_enm_ext(t_env *e, int j, int i)
 	}
 }
 
+int	ft_check_map2(t_env *e)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < e->w.y)
+	{
+		x = 0;
+		while (ft_isalnum(e->w.m[y][x]))
+			x++;
+		if (x != e->w.x)
+			ft_error(e, "error : invalid map (map is not rectangular)\n");
+		y++;
+	}
+	return (0);
+}
+
+int	ft_check_map(t_env *e)
+{
+	int	i;
+	int	j;
+
+	ft_check_map2(e);
+	i = -1;
+	while (++i < e->w.y)
+	{
+		j = -1;
+		while (++j < e->w.x)
+		{
+			if ((i == 0 || i == e->w.y - 1 || j == 0 || j == e->w.x - 1)
+				&& e->w.m[i][j] != '1')
+				ft_error(e, "error : invalid map (wall incomplete)\n");
+			else if (e->w.m[i][j] == 'C')
+				e->obj_c = 1;
+			else if (e->w.m[i][j] == 'E')
+				e->ex_x = 1;
+			else if (e->w.m[i][j] == 'P')
+				e->pg_x = 1;
+			else if (e->w.m[i][j] != '1' && e->w.m[i][j] != '0' && e->w.m[i][j] != 'N')
+				ft_error(e, "error : invalid map (invalid set)\n");
+		}
+	}
+	if (e->ex_x != 1 || e->obj_c != 1 || e->pg_x != 1)
+		ft_error(e, "error : invalid map (missing set)\n");
+	else
+	ft_myinit(e);
+	return (0);
+}
+
 void	ft_make_map(t_env *e)
 {
 	int	i;
 	int	j;
 
+	ft_check_map(e);
 	i = -1;
-	e->obj_x = (int *) malloc (sizeof(int) * 1);
-	e->obj_y = (int *) malloc (sizeof(int) * 1);
-	e->n.n_x = (int *) malloc (sizeof(int) * 1);
-	e->n.n_y = (int *) malloc (sizeof(int) * 1);
-	if (!e->obj_x || !e->obj_y || !e->n.n_x || !e->n.n_y)
-		exit(1);
+	// e->obj_x = (int *) malloc (sizeof(int) * 1);
+	// e->obj_y = (int *) malloc (sizeof(int) * 1);
+	// e->n.n_x = (int *) malloc (sizeof(int) * 1);
+	// e->n.n_y = (int *) malloc (sizeof(int) * 1);
+	// if (!e->obj_x || !e->obj_y || !e->n.n_x || !e->n.n_y)
+	// 	exit(1);
 	while (++i < e->w.y)
 	{
 		j = -1;
@@ -115,19 +166,3 @@ void	ft_make_map(t_env *e)
 		}
 	}
 }
-
-// int	ft_check_map(t_env *e)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = -1;
-// 	while (++i < e->w.y)
-// 	{
-// 		j = -1;
-// 		while (++j < e->w.x)
-// 		{
-
-// 		}
-// 	}
-// }

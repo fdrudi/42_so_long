@@ -6,27 +6,35 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/20 19:00:40 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/21 15:36:01 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-#include <stdio.h>
+void	ft_error(t_env *e, char *s)
+{
+	ft_putstr_fd(s, 2);
+	ft_exit(e);
+	exit(1);
+}
 
 int	ft_hook_loop(t_env *e)
 {
-	ft_obj_animation(e);
-	if (e->end == 0)
+	if (e->win != NULL)
 	{
-		ft_enemy_patrol(e);
-		ft_enemy_animation(e);
-		ft_enemy_attack(e);
+		ft_obj_animation(e);
+		if (e->end == 0)
+		{
+			ft_enemy_patrol(e);
+			ft_enemy_animation(e);
+			ft_enemy_attack(e);
+		}
+		if (e->obj_c == 0)
+			ft_check_exit(e);
+		if (e->w.m[e->pg_y][e->pg_x] == 'E')
+			ft_fade(e);
 	}
-	if (e->obj_c == 0)
-		ft_check_exit(e);
-	if (e->w.m[e->pg_y][e->pg_x] == 'E')
-		ft_fade(e);
 	return (0);
 }
 
@@ -172,9 +180,9 @@ int	main(int argc, char *argv[])
 	t_env	e;
 
 	e.mlx = mlx_init();
+	if (e.mlx == NULL)
+		ft_error(&e, "error : allocation error\n");
 	e.next = 0;
-	e.n.x_m = (int *) malloc (sizeof(int) * 1);
-	e.n.y_m = (int *) malloc (sizeof(int) * 1);
 	if (argc > 1)
 	{
 		ft_set_av_ac(&e, argc, argv);
