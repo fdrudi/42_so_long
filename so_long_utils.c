@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 11:42:04 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 11:07:56 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strlen_y(char **s)
 	int	i;
 
 	i = 0;
-	while (s[i] != 0)
+	while (s[i])
 		i++;
 	return (i);
 }

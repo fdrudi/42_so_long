@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 17:41:27 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 12:52:14 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_env
 	int		d4;
 	int		d5;
 	int		d6;
+	int		d_mg;
 	int		index;
 	int		mv;
 	int		i_x;
@@ -117,6 +118,7 @@ void	ft_myinit3(t_env *e);
 void	free_matrix(char **matrix);
 void	ft_map_path(t_env *e);
 void	ft_check_map(t_env *e);
+int		ft_mage_move(t_env *e);
 
 int		ft_enemy_move_a(t_env *e, int j);
 int		ft_enemy_move_d(t_env *e, int j);

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 17:44:37 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 13:13:24 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_hook_loop(t_env *e)
 		ft_obj_animation(e);
 		if (e->end == 0)
 		{
+			if (e->lst_key != -1)
+				ft_mage_move(e);
 			ft_enemy_patrol(e);
 			ft_enemy_animation(e);
 			ft_enemy_attack(e);
@@ -36,26 +38,30 @@ int	ft_key_act(t_env *e, int key)
 	if ((key == 13 || key == 126) && e->w.m[e->pg_y - 1][e->pg_x] != '1'
 			&& (e->w.m[e->pg_y - 1][e->pg_x] != 'E' || e->obj_c == -1))
 	{
-		ft_move_pg(e, -1, 0);
-		ft_move_count(e, &e->w);
+		if (e->lst_key == -1)
+			e->lst_key = 1;
+		// ft_move_pg(e, -1, 0);
 	}
 	if ((key == 1 || key == 125) && e->w.m[e->pg_y + 1][e->pg_x] != '1'
 		&& (e->w.m[e->pg_y + 1][e->pg_x] != 'E' || e->obj_c == -1))
 	{
-		ft_move_pg(e, 1, 0);
-		ft_move_count(e, &e->w);
+		if (e->lst_key == -1)
+			e->lst_key = 2;
+		// ft_move_pg(e, 1, 0);
 	}
 	if ((key == 0 || key == 123) && e->w.m[e->pg_y][e->pg_x - 1] != '1'
 		&& (e->w.m[e->pg_y][e->pg_x - 1] != 'E' || e->obj_c == -1))
 	{
-		ft_move_pg(e, 0, -1);
-		ft_move_count(e, &e->w);
+		if (e->lst_key == -1)
+			e->lst_key = 3;
+		// ft_move_pg(e, 0, -1);
 	}
 	if ((key == 2 || key == 124) && e->w.m[e->pg_y][e->pg_x + 1] != '1'
 		&& (e->w.m[e->pg_y][e->pg_x + 1] != 'E' || e->obj_c == -1))
 	{
-		ft_move_pg(e, 0, 1);
-		ft_move_count(e, &e->w);
+		if (e->lst_key == -1)
+			e->lst_key = 4;
+		// ft_move_pg(e, 0, 1);
 	}
 	return (0);
 }
