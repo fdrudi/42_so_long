@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 12:52:14 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 14:50:00 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_env
 	int		i_y;
 	int		pg_y;
 	int		pg_x;
+	int		pg_c;
 	int		*obj_x;
 	int		*obj_y;
 	int		obj_c;
@@ -87,7 +88,7 @@ void	ft_free_matrix(char **matrix);
 int		ft_start(t_env *e);
 void	ft_make_map(t_env *e);
 int		ft_check_next_map(t_env *e);
-int		ft_check_obj(t_env *e);
+int		ft_check_obj(t_env *e, int y, int x);
 int		ft_strlen_y(char **s);
 int		ft_hook_loop(t_env *e);
 int		ft_obj_animation(t_env *e);

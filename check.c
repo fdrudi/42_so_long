@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:08 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 16:13:48 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 14:49:46 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ int	ft_endgame(t_env *e)
 	return (0);
 }
 
-int	ft_check_obj(t_env *e)
+int	ft_check_obj(t_env *e, int y, int x)
 {
 	int	i;
 
 	i = 0;
 	while (i < e->obj_c)
 	{
-		if (e->w.m[e->pg_y][e->pg_x] == e->w.m[e->obj_y[i]][e->obj_x[i]])
+		if (e->w.m[y][x] == e->w.m[e->obj_y[i]][e->obj_x[i]])
 		{
 			e->obj_x = ft_int_trim(e->obj_x, i, e->obj_c);
 			e->obj_y = ft_int_trim(e->obj_y, i, e->obj_c);

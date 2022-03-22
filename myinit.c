@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:34:58 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 13:11:19 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 14:31:16 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_myinit(t_env *e)
 	e->obj_c = 0;
 	e->n.n_c = 0;
 	e->lst_key = -1;
+	e->pg_c = 0;
 }
 
 void	ft_myinit2(t_env *e)
