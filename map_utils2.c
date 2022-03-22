@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:05:49 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 17:09:47 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 17:30:49 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	ft_check_map(t_env *e)
 			else if (e->w.m[i][j] == 'E')
 				e->ex_x = 1;
 			else if (e->w.m[i][j] == 'P')
-				e->pg_x = 1;
+				e->p.pg_x = 1;
 		}
 	}
-	if (e->ex_x != 1 || e->obj_c != 1 || e->pg_x != 1)
+	if (e->ex_x != 1 || e->obj_c != 1 || e->p.pg_x != 1)
 		ft_error(e, "error : invalid map (missing set)\n");
 	else
 		ft_myinit(e);

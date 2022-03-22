@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:08 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 14:49:46 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 17:30:00 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_endgame(t_env *e)
 	int	x;
 	int	y;
 
-	if (e->w.m[e->pg_y][e->pg_x] == 'E')
+	if (e->w.m[e->p.pg_y][e->p.pg_x] == 'E')
 	{
 		if (ft_check_next_map(e) == 1)
 		{

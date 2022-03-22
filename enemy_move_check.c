@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:43:32 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 17:29:21 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 17:30:18 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	ft_check_enemy_moves(t_env *e, int j)
 	int	x1;
 	int	y1;
 
-	x = e->pg_x - e->n.n_x[j];
-	y = e->pg_y - e->n.n_y[j];
+	x = e->p.pg_x - e->n.n_x[j];
+	y = e->p.pg_y - e->n.n_y[j];
 	x1 = x;
 	y1 = y;
 	if (x1 < 0)
@@ -93,8 +93,8 @@ int	ft_check_enemy_moves_b(t_env *e, int j)
 	int	x1;
 	int	y1;
 
-	x = e->pg_x - e->n.n_x[j];
-	y = e->pg_y - e->n.n_y[j];
+	x = e->p.pg_x - e->n.n_x[j];
+	y = e->p.pg_y - e->n.n_y[j];
 	x1 = x;
 	y1 = y;
 	if (x1 < 0)

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 15:51:34 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 19:35:12 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@ int	ft_hook_loop(t_env *e)
 		ft_obj_animation(e);
 		if (e->end == 0 || e->end == -1)
 		{
-			if (e->lst_key != -1 && e->end == 0)
+			if (e->lst_key != -1 && e->lst_key != 7 && e->end == 0)
 				ft_mage_move(e);
+			else if (e->lst_key == 7 && e->end == 0)
+				ft_mage_attack(e);
 			ft_enemy_patrol(e);
 			ft_enemy_animation(e);
 			ft_enemy_attack(e);
 		}
 		if (e->obj_c == 0)
 			ft_check_exit(e);
-		if (e->pg_c == -1)
+		if (e->w.m[e->p.y_p][e->p.x_p] == 'E')
 			ft_fade(e);
 	}
 	return (0);
@@ -35,34 +37,57 @@ int	ft_hook_loop(t_env *e)
 
 int	ft_key_act(t_env *e, int key)
 {
-	if ((key == 13 || key == 126) && e->w.m[e->pg_y - 1][e->pg_x] != '1'
-			&& (e->w.m[e->pg_y - 1][e->pg_x] != 'E' || e->obj_c == -1))
+	if ((key == 13 || key == 126) && e->w.m[e->p.pg_y - 1][e->p.pg_x] != '1'
+			&& (e->w.m[e->p.pg_y - 1][e->p.pg_x] != 'E' || e->obj_c == -1))
 	{
-		if (e->lst_key == -1)
+		if (e->lst_key == -1 && e->p.atk == 1)
 			e->lst_key = 1;
-		// ft_move_pg(e, -1, 0);
+		else if (e->lst_key == -1)
+		{
+			e->p.atk = 1;
+			e->index = 0;
+			ft_animate(e, "./sprites/mage/mage_back", e->p.pg_x, e->p.pg_y);
+		}
 	}
-	if ((key == 1 || key == 125) && e->w.m[e->pg_y + 1][e->pg_x] != '1'
-		&& (e->w.m[e->pg_y + 1][e->pg_x] != 'E' || e->obj_c == -1))
+	else if ((key == 1 || key == 125) && e->w.m[e->p.pg_y + 1][e->p.pg_x] != '1'
+		&& (e->w.m[e->p.pg_y + 1][e->p.pg_x] != 'E' || e->obj_c == -1))
 	{
-		if (e->lst_key == -1)
+		if (e->lst_key == -1 && e->p.atk == 2)
 			e->lst_key = 2;
-		// ft_move_pg(e, 1, 0);
+		else if (e->lst_key == -1)
+		{
+			e->p.atk = 2;
+			e->index = 0;
+			ft_animate(e, "./sprites/mage/mage_front", e->p.pg_x, e->p.pg_y);
+		}
 	}
-	if ((key == 0 || key == 123) && e->w.m[e->pg_y][e->pg_x - 1] != '1'
-		&& (e->w.m[e->pg_y][e->pg_x - 1] != 'E' || e->obj_c == -1))
+	else if ((key == 0 || key == 123) && e->w.m[e->p.pg_y][e->p.pg_x - 1] != '1'
+		&& (e->w.m[e->p.pg_y][e->p.pg_x - 1] != 'E' || e->obj_c == -1))
 	{
-		if (e->lst_key == -1)
+		if (e->lst_key == -1 && e->p.atk == 3)
 			e->lst_key = 3;
-		// ft_move_pg(e, 0, -1);
+		else if (e->lst_key == -1)
+		{
+			e->p.atk = 3;
+			e->index = 0;
+			ft_animate(e, "./sprites/mage/mage_sx", e->p.pg_x, e->p.pg_y);
+		}
 	}
-	if ((key == 2 || key == 124) && e->w.m[e->pg_y][e->pg_x + 1] != '1'
-		&& (e->w.m[e->pg_y][e->pg_x + 1] != 'E' || e->obj_c == -1))
+	else if ((key == 2 || key == 124) && e->w.m[e->p.pg_y][e->p.pg_x + 1] != '1'
+		&& (e->w.m[e->p.pg_y][e->p.pg_x + 1] != 'E' || e->obj_c == -1))
 	{
-		if (e->lst_key == -1)
+		if (e->lst_key == -1 && e->p.atk == 4)
 			e->lst_key = 4;
-		// ft_move_pg(e, 0, 1);
+		else if (e->lst_key == -1)
+		{
+			e->p.atk = 4;
+			e->index = 0;
+			ft_animate(e, "./sprites/mage/mage_dx", e->p.pg_x, e->p.pg_y);
+		}
 	}
+	else if (key == 49 && ft_cond_mage(e) == 0)
+		if (e->lst_key == -1)
+			e->lst_key = 7;
 	return (0);
 }
 
@@ -99,8 +124,8 @@ int	ft_key_press(int key, t_env *e)
 // {
 // 	if (e->end == 0)
 // 	{
-// 		if ((key == 13 || key == 126) && e->w.m[e->pg_y - 1][e->pg_x] != '1'
-// 			&& (e->w.m[e->pg_y - 1][e->pg_x] != 'E' || e->obj_c == -1))
+// 		if ((key == 13 || key == 126) && e->w.m[e->p.pg_y - 1][e->p.pg_x] != '1'
+// 			&& (e->w.m[e->p.pg_y - 1][e->p.pg_x] != 'E' || e->obj_c == -1))
 // 		{
 // 			// if (e->lst_key != 1)
 // 			// {
@@ -108,12 +133,12 @@ int	ft_key_press(int key, t_env *e)
 // 			// 	return (0);
 // 			// }
 // 			// ft_move_pg(e, -1, 0);
-// 			if (e->pg_c == 5)
+// 			if (e->p.pg_c == 5)
 // 				e->lst_key = -1;
 
 // 		}
-// 		if ((key == 1 || key == 125) && e->w.m[e->pg_y + 1][e->pg_x] != '1'
-// 			&& (e->w.m[e->pg_y + 1][e->pg_x] != 'E' || e->obj_c == -1))
+// 		if ((key == 1 || key == 125) && e->w.m[e->p.pg_y + 1][e->p.pg_x] != '1'
+// 			&& (e->w.m[e->p.pg_y + 1][e->p.pg_x] != 'E' || e->obj_c == -1))
 // 		{
 // 			// if (e->lst_key != 2)
 // 			// {
@@ -121,12 +146,12 @@ int	ft_key_press(int key, t_env *e)
 // 			// 	return (0);
 // 			// }
 // 			// ft_move_pg(e, 1, 0);
-// 			if (e->pg_c == 5)
+// 			if (e->p.pg_c == 5)
 // 				e->lst_key = -1;
 
 // 		}
-// 		if ((key == 0 || key == 123) && e->w.m[e->pg_y][e->pg_x - 1] != '1'
-// 			&& (e->w.m[e->pg_y][e->pg_x - 1] != 'E' || e->obj_c == -1))
+// 		if ((key == 0 || key == 123) && e->w.m[e->p.pg_y][e->p.pg_x - 1] != '1'
+// 			&& (e->w.m[e->p.pg_y][e->p.pg_x - 1] != 'E' || e->obj_c == -1))
 // 		{
 // 			// if (e->lst_key != 3)
 // 			// {
@@ -134,11 +159,11 @@ int	ft_key_press(int key, t_env *e)
 // 			// 	return (0);
 // 			// }
 // 			// ft_move_pg(e, 0, -1);
-// 			if (e->pg_c == 5)
+// 			if (e->p.pg_c == 5)
 // 				e->lst_key = -1;
 // 		}
-// 		if ((key == 2 || key == 124) && e->w.m[e->pg_y][e->pg_x + 1] != '1'
-// 			&& (e->w.m[e->pg_y][e->pg_x + 1] != 'E' || e->obj_c == -1))
+// 		if ((key == 2 || key == 124) && e->w.m[e->p.pg_y][e->p.pg_x + 1] != '1'
+// 			&& (e->w.m[e->p.pg_y][e->p.pg_x + 1] != 'E' || e->obj_c == -1))
 // 		{
 // 			// if (e->lst_key != 4)
 // 			// {
@@ -146,7 +171,7 @@ int	ft_key_press(int key, t_env *e)
 // 			// 	return (0);
 // 			// }
 // 			// ft_move_pg(e, 0, 1);
-// 			if (e->pg_c == 5)
+// 			if (e->p.pg_c == 5)
 // 				e->lst_key = -1;
 // 		}
 // 	}

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 12:57:10 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 17:30:42 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ft_obj_pg(t_env *e, int j, int i)
 		e->path = "./sprites/mage/mage_front0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
-		e->pg_x = j;
-		e->pg_y = i;
+		e->p.pg_x = j;
+		e->p.pg_y = i;
 	}
 	if (e->w.m[i][j] == 'C')
 	{

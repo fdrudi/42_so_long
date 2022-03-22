@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 14:50:00 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 19:19:46 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,19 @@ typedef struct s_enemy
 	int		*i;
 }				t_enemy;
 
+typedef struct s_pg
+{
+	int		pg_y;
+	int		pg_x;
+	int		pg_c;
+	int		d_mg;
+	int		d_ak;
+	int		atk;
+	int		atk_c;
+	int		x_p;
+	int		y_p;
+}				t_pg;
+
 typedef struct s_env
 {
 	void	*mlx;
@@ -56,19 +69,16 @@ typedef struct s_env
 	int		d4;
 	int		d5;
 	int		d6;
-	int		d_mg;
 	int		index;
 	int		mv;
 	int		i_x;
 	int		i_y;
-	int		pg_y;
-	int		pg_x;
-	int		pg_c;
 	int		*obj_x;
 	int		*obj_y;
 	int		obj_c;
 	int		ex_y;
 	int		ex_x;
+	t_pg	p;
 	t_win	w;
 	t_enemy	n;
 }				t_env;
@@ -119,7 +129,10 @@ void	ft_myinit3(t_env *e);
 void	free_matrix(char **matrix);
 void	ft_map_path(t_env *e);
 void	ft_check_map(t_env *e);
+
 int		ft_mage_move(t_env *e);
+int		ft_mage_attack(t_env *e);
+int		ft_cond_mage(t_env *e);
 
 int		ft_enemy_move_a(t_env *e, int j);
 int		ft_enemy_move_d(t_env *e, int j);

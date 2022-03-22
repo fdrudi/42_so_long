@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:40:20 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 17:28:46 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/22 17:30:26 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,25 @@ int	ft_cond(t_env *e, int y, int x)
 
 int	ft_check_attack(t_env *e, int j)
 {
-	if (e->w.m[e->n.n_y[j] - 1][e->n.n_x[j]] == e->w.m[e->pg_y][e->pg_x])
+	if (e->w.m[e->n.n_y[j] - 1][e->n.n_x[j]] == e->w.m[e->p.pg_y][e->p.pg_x])
 	{
 		e->n.y_m[j] = -1;
 		e->n.x_m[j] = 0;
 		return (1);
 	}
-	else if (e->w.m[e->n.n_y[j] + 1][e->n.n_x[j]] == e->w.m[e->pg_y][e->pg_x])
+	else if (e->w.m[e->n.n_y[j] + 1][e->n.n_x[j]] == e->w.m[e->p.pg_y][e->p.pg_x])
 	{
 		e->n.y_m[j] = 1;
 		e->n.x_m[j] = 0;
 		return (1);
 	}
-	else if (e->w.m[e->n.n_y[j]][e->n.n_x[j] - 1] == e->w.m[e->pg_y][e->pg_x])
+	else if (e->w.m[e->n.n_y[j]][e->n.n_x[j] - 1] == e->w.m[e->p.pg_y][e->p.pg_x])
 	{
 		e->n.x_m[j] = -1;
 		e->n.y_m[j] = 0;
 		return (1);
 	}
-	else if (e->w.m[e->n.n_y[j]][e->n.n_x[j] + 1] == e->w.m[e->pg_y][e->pg_x])
+	else if (e->w.m[e->n.n_y[j]][e->n.n_x[j] + 1] == e->w.m[e->p.pg_y][e->p.pg_x])
 	{
 		e->n.x_m[j] = 1;
 		e->n.y_m[j] = 0;
@@ -58,8 +58,8 @@ int	ft_check_pg(t_env *e, int j)
 
 	if (e->n.i[j] == 0)
 	{
-		x = e->pg_x - e->n.n_x[j];
-		y = e->pg_y - e->n.n_y[j];
+		x = e->p.pg_x - e->n.n_x[j];
+		y = e->p.pg_y - e->n.n_y[j];
 		x1 = x;
 		y1 = y;
 		if (x1 < 0)
