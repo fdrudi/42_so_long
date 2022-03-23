@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 19:35:12 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/23 12:11:31 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_hook_loop(t_env *e)
 		{
 			if (e->lst_key != -1 && e->lst_key != 7 && e->end == 0)
 				ft_mage_move(e);
-			else if (e->lst_key == 7 && e->end == 0)
+			else if (e->lst_key == 7)
 				ft_mage_attack(e);
 			ft_enemy_patrol(e);
 			ft_enemy_animation(e);
@@ -42,7 +42,7 @@ int	ft_key_act(t_env *e, int key)
 	{
 		if (e->lst_key == -1 && e->p.atk == 1)
 			e->lst_key = 1;
-		else if (e->lst_key == -1)
+		else if (e->lst_key == -1 && e->end == 0)
 		{
 			e->p.atk = 1;
 			e->index = 0;
@@ -54,7 +54,7 @@ int	ft_key_act(t_env *e, int key)
 	{
 		if (e->lst_key == -1 && e->p.atk == 2)
 			e->lst_key = 2;
-		else if (e->lst_key == -1)
+		else if (e->lst_key == -1 && e->end == 0)
 		{
 			e->p.atk = 2;
 			e->index = 0;
@@ -66,7 +66,7 @@ int	ft_key_act(t_env *e, int key)
 	{
 		if (e->lst_key == -1 && e->p.atk == 3)
 			e->lst_key = 3;
-		else if (e->lst_key == -1)
+		else if (e->lst_key == -1 && e->end == 0)
 		{
 			e->p.atk = 3;
 			e->index = 0;
@@ -78,7 +78,7 @@ int	ft_key_act(t_env *e, int key)
 	{
 		if (e->lst_key == -1 && e->p.atk == 4)
 			e->lst_key = 4;
-		else if (e->lst_key == -1)
+		else if (e->lst_key == -1 && e->end == 0)
 		{
 			e->p.atk = 4;
 			e->index = 0;

@@ -6,7 +6,7 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/22 18:23:50 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/23 10:22:55 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,9 @@ CC			=	gcc #-fsanitize=address
 RM			=	rm -f
 
 CFLAGS		=	#-Wall -Wextra -Werror
+
+%.o:%.c
+			$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJ)
 			make -C ./libft
