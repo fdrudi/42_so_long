@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:45:56 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 16:08:42 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/23 17:21:34 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_exit(t_env *e)
 	ft_free_matrix(e->w.m);
 	free(e->obj_x);
 	free(e->obj_y);
-	if (e->n.n_c > 0)
+	if (e->n.n_c >= 0)
 	{
 		free(e->n.n_x);
 		free(e->n.n_y);
