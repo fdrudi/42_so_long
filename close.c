@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:45:56 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 15:37:33 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/23 16:08:42 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void	ft_you_died(t_env *e)
 	int	y;
 
 	e->end = -1;
+	e->w.m[e->p.pg_y][e->p.pg_x] = '0';
+	e->p.pg_x = 0;
+	e->p.pg_y = 0;
 	ft_check_size_map3(e, &y, &x);
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x, y);
-	return (0);
 }
 
 int	ft_close_win(t_env *e)

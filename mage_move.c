@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:03:10 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 15:02:34 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/23 16:06:24 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_mage_move(t_env *e)
 		e->index = 0;
 	if (e->w.m[e->p.pg_y][e->p.pg_x] == 'N')
 	{
-		e->end = -1;
+		ft_you_died(e);
 		return (1);
 	}
 	else if (e->lst_key == 1)

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 19:19:46 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/23 16:04:20 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,11 @@ void	ft_myinit3(t_env *e);
 void	free_matrix(char **matrix);
 void	ft_map_path(t_env *e);
 void	ft_check_map(t_env *e);
+void	ft_you_died(t_env *e);
+
+void	ft_check_size_map(t_env *e, int *y, int *x);
+void	ft_check_size_map2(t_env *e, int *y, int *x);
+void	ft_check_size_map3(t_env *e, int *y, int *x);
 
 int		ft_mage_move(t_env *e);
 int		ft_mage_attack(t_env *e);
