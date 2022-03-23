@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:03:10 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 12:36:19 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:02:34 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,26 @@ int	ft_mage_move_help(t_env *e, char *s, int y, int x)
 	return (0);
 }
 
-void	ft_print_map(t_env *e)
-{
-	int	y = 0;
-	int	x = 0;
+// void	ft_print_map(t_env *e)
+// {
+// 	int	y = 0;
+// 	int	x = 0;
 
-	while (y < e->w.y)
-	{
-		x = 0;
-		while (x < e->w.x)
-		{
-			printf("%c", e->w.m[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	printf("\n");
-	printf("\n");
-	printf("\n");
-}
+// 	while (y < e->w.y)
+// 	{
+// 		x = 0;
+// 		while (x < e->w.x)
+// 		{
+// 			printf("%c", e->w.m[y][x]);
+// 			x++;
+// 		}
+// 		printf("\n");
+// 		y++;
+// 	}
+// 	printf("\n");
+// 	printf("\n");
+// 	printf("\n");
+// }
 
 int	ft_mage_move(t_env *e)
 {
@@ -98,7 +98,7 @@ int	ft_mage_move(t_env *e)
 		e->p.atk = e->lst_key;
 		e->lst_key = -1;
 		ft_move_count(e, &e->w);
-		ft_print_map(e);
+		// ft_print_map(e);
 	}
 	return (0);
 }

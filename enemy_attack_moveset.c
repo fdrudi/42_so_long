@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:39:57 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 17:30:09 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:07:08 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_enemy_move_atk_a(t_env *e, int j, int y, int x)
 		if (e->n.i[j] == 5)
 		{
 			ft_put_floor(e, x, y);
-			if (e->w.m[y][x] == e->w.m[e->p.pg_y][e->p.pg_x])
+			if (e->w.m[y][x] == 'P')
 				e->end = -1;
 		}
 		else if (e->n.i[j] == 1)
@@ -49,7 +49,7 @@ void	ft_enemy_move_atk_d(t_env *e, int j, int y, int x)
 		if (e->n.i[j] == 5)
 		{
 			ft_put_floor(e, x, y);
-			if (e->w.m[y][x] == e->w.m[e->p.pg_y][e->p.pg_x])
+			if (e->w.m[y][x] == 'P')
 				e->end = -1;
 		}
 		else if (e->n.i[j] == 1)
@@ -78,7 +78,7 @@ void	ft_enemy_move_atk_w(t_env *e, int j, int y, int x)
 		if (e->n.i[j] == 5)
 		{
 			ft_put_floor(e, x, y);
-			if (e->w.m[y][x] == e->w.m[e->p.pg_y][e->p.pg_x])
+			if (e->w.m[y][x] == 'P')
 				e->end = -1;
 		}
 		else if (e->n.i[j] == 1)
@@ -107,7 +107,7 @@ void	ft_enemy_move_atk_s(t_env *e, int j, int y, int x)
 		if (e->n.i[j] == 5)
 		{
 			ft_put_floor(e, x, y);
-			if (e->w.m[y][x] == e->w.m[e->p.pg_y][e->p.pg_x])
+			if (e->w.m[y][x] == 'P')
 				e->end = -1;
 		}
 		else if (e->n.i[j] == 1)

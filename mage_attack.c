@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:23:36 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 12:31:52 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:00:15 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ int	ft_check_enm(t_env *e, int y, int x)
 	i = 0;
 	while (i < e->n.n_c)
 	{
-		if (e->w.m[y][x] == e->w.m[e->n.n_y[i]][e->n.n_x[i]] && (e->n.i[i] < 2 || e->n.i[i] > 3))
+		if (e->w.m[y][x] == e->w.m[e->n.n_y[i]][e->n.n_x[i]] && e->n.patr[i] == 2)
 		{
+			e->w.m[e->n.n_y[i]][e->n.n_x[i]] = '0';
 			e->n.n_x = ft_int_trim(e->n.n_x, i, e->n.n_c);
 			e->n.n_y = ft_int_trim(e->n.n_y, i, e->n.n_c);
 			e->n.i = ft_int_trim(e->n.i, i, e->n.n_c);
@@ -58,6 +59,7 @@ int	ft_check_enm(t_env *e, int y, int x)
 
 int	ft_mage_atk_help(t_env *e, char *s, int y, int x)
 {
+	ft_check_enm(e, y, x);
 	if (e->p.atk_c <= 1 || e->p.atk_c == 3 || e->p.atk_c == 8)
 		ft_animate(e, s, e->p.pg_x, e->p.pg_y);
 	if (e->p.atk_c == 1 || e->p.atk_c == 3 || e->p.atk_c == 8)
@@ -68,7 +70,7 @@ int	ft_mage_atk_help(t_env *e, char *s, int y, int x)
 	}
 	else if (e->p.atk_c == 5 || e->p.atk_c == 6 || e->p.atk_c == 7)
 	{
-		ft_check_enm(e, y, x);
+
 		ft_animate_b(e, s, x, y);
 	}
 	else if (e->p.atk_c > 9)
