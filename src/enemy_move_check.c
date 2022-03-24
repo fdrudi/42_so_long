@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:43:32 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 16:05:26 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:46:44 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_check_enemy_help(t_env *e, int i, int j, int a)
 {

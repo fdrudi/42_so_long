@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:40:20 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 16:05:35 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:46:49 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_cond(t_env *e, int y, int x)
 {

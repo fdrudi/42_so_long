@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:34:58 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:12:22 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 18:24:22 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_map_path(t_env *e)
 {
@@ -48,6 +48,7 @@ void	ft_myinit(t_env *e)
 	e->p.y_p = 0;
 	e->p.atk = 0;
 	e->p.atk_c = 0;
+	e->n.n_m = 0;
 }
 
 void	ft_myinit2(t_env *e)

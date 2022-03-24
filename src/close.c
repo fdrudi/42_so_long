@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:45:56 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 12:37:19 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 18:41:03 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_error(t_env *e, char *s)
 {
@@ -41,12 +41,12 @@ int	ft_close_win(t_env *e)
 	return (0);
 }
 
-void	ft_free_matrix(char **matrix)
+void	ft_free_matrix(char **matrix, int y)
 {
 	int	i;
 
 	i = 0;
-	while (matrix[i] != NULL)
+	while (i < y)
 	{
 		free(matrix[i]);
 		i++;
@@ -56,13 +56,13 @@ void	ft_free_matrix(char **matrix)
 
 void	ft_exit(t_env *e)
 {
-	ft_free_matrix(e->w.m);
+	ft_free_matrix(e->w.m, e->w.y);
 	free(e->obj_x);
 	free(e->obj_y);
-	if (e->n.n_c >= 0)
+	free(e->n.n_x);
+	free(e->n.n_y);
+	if (e->n.n_m == 1)
 	{
-		free(e->n.n_x);
-		free(e->n.n_y);
 		free(e->n.patr);
 		free(e->n.x_m);
 		free(e->n.y_m);

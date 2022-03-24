@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:59:52 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:16:25 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:48:20 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_put_floor_map(t_env *e, int x, int y)
 {

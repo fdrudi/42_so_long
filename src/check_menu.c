@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:39:59 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 13:12:23 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:46:17 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_check_size_map_help(t_env *e, int *y, int *x)
 {

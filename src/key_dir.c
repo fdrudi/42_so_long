@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:22:14 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 12:37:30 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:47:07 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_key_act_w(t_env *e, int key)
 {

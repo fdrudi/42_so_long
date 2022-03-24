@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:50:50 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 12:44:16 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 16:53:52 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_hook_loop(t_env *e)
 {

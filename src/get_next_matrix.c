@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:13:22 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 11:41:32 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:47:01 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_strlen_gnl(char *s)
 {

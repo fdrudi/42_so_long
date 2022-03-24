@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:17:20 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 18:25:25 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_wall_help(t_env *e, int j, int i)
 {
@@ -109,4 +109,6 @@ void	ft_make_map(t_env *e)
 			}
 		}
 	}
+	if (e->n.n_c > 0)
+		e->n.n_m = 1;
 }

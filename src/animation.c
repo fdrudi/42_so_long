@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:17:49 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:46:13 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_animate_b(t_env *e, char *s2, int x, int y)
 {

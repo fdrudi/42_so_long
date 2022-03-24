@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:05:49 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 17:30:49 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:47:25 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_check_map2(t_env *e)
 {

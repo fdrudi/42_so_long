@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:03:10 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 14:37:15 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:47:14 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_fade(t_env *e)
 {

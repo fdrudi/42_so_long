@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:26:26 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 13:07:06 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:46:53 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_enemy_animation_help(t_env *e, int j)
 {

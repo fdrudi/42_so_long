@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:39:57 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 12:27:55 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:46:32 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_enemy_move_atk_a(t_env *e, int j, int y, int x)
 {

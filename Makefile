@@ -6,18 +6,18 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/24 14:32:01 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/24 18:43:27 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	so_long
 
-SRC			=	so_long.c so_long_utils.c map_utils.c check.c animation.c\
-				enemy_move.c set_env.c close.c animation_utils.c myinit.c\
-				enemy_move_utils.c enemy_move_check.c enemy_attack.c\
-				map_utils2.c enemy_moveset.c enemy_attack_moveset.c\
-				mage_move.c mage_attack.c check_menu.c check_menu2.c\
-				enemy_dir.c key_dir.c get_next_matrix.c\
+SRC			=	./src/so_long.c ./src/so_long_utils.c ./src/map_utils.c ./src/check.c ./src/animation.c\
+				./src/enemy_move.c ./src/set_env.c ./src/close.c ./src/animation_utils.c ./src/myinit.c\
+				./src/enemy_move_utils.c ./src/enemy_move_check.c ./src/enemy_attack.c\
+				./src/map_utils2.c ./src/enemy_moveset.c ./src/enemy_attack_moveset.c\
+				./src/mage_move.c ./src/mage_attack.c ./src/check_menu.c ./src/check_menu2.c\
+				./src/enemy_dir.c ./src/key_dir.c ./src/get_next_matrix.c\
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -25,11 +25,11 @@ MLX			=	./libmlx.dylib
 
 LIBFT		=	libft/libft.a
 
-CC			=	gcc #-fsanitize=address
+CC			=	gcc
 
 RM			=	rm -f
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -Imlx
 
 %.o:%.c
 			$(CC) $(CFLAGS) -c $< -o $@

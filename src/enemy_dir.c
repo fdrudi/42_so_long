@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:06:47 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 13:06:58 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:46:40 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_enemy_dir_help(t_env *e, int j)
 {
