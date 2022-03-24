@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:34:58 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 11:15:20 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:12:22 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_map_path(t_env *e)
 	char	*c;
 
 	c = ft_itoa(e->next);
-	s1 = ft_strjoin("./map", c);
+	s1 = ft_strjoin("./map/map", c);
 	free(c);
 	e->path = s1;
 	free(s1);

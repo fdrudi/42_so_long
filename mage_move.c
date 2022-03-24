@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:03:10 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 12:43:57 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 14:37:15 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_mg_move_help2(t_env *e, char *s, int y, int x)
 		e->p.x_p = x;
 		e->lst_key = -1;
 	}
-	return ;
 }
 
 int	ft_mg_move_help(t_env *e, char *s, int y, int x)

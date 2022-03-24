@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 12:27:41 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:17:49 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_obj_animation(t_env *e)
 	while (j < e->obj_c)
 	{
 		e->index = i;
-		ft_animate(e, "./spr/coin", e->obj_x[j], e->obj_y[j]);
+		ft_animate(e, "./spr/obj/coin", e->obj_x[j], e->obj_y[j]);
 		j++;
 	}
 	i++;
