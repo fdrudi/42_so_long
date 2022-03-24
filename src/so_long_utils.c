@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:47:38 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 19:11:20 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_set_av_ac(t_env *e, int argc, char **argv)
 		exit(1);
 	while (i < argc)
 	{
-		e->w.av[i] = ft_substr(argv[i], 0, ft_strlen(argv[i]));
+		e->w.av[i] = ft_strdup(argv[i]);
 		i++;
 	}
 	e->w.av[i] = 0;

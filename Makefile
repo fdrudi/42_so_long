@@ -6,7 +6,7 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/24 18:43:27 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/24 19:14:10 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ CFLAGS		=	-Wall -Wextra -Werror -Imlx
 $(NAME):	$(OBJ)
 			make -C ./libft
 			make -C ./minilibx_mms_20200219
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX) $(LIBFT)
+			$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(MLX) $(LIBFT)
 
 all:		$(NAME)
 
