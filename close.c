@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:45:56 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 17:21:34 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 12:37:19 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ int	ft_close_win(t_env *e)
 {
 	mlx_destroy_window(e->mlx, e->win);
 	ft_exit(e);
-	// ft_free_matrix(e->w.av);
-	// free(e->img);
-	// free(e->win);
-	// free(e->mlx);
-	// free(e->path);
 	exit(0);
 	return (0);
 }

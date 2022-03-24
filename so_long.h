@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 16:04:20 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 13:17:50 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdio.h>
 
 typedef struct s_win
 {
@@ -83,6 +82,7 @@ typedef struct s_env
 	t_enemy	n;
 }				t_env;
 
+int		ft_set_av_ac(t_env *e, int argc, char **argv);
 int		*ft_intjoin(int *str, int i, int size);
 char	*ft_strclean(char *str);
 int		*ft_int_trim(int *str, int pos, int size);
@@ -99,7 +99,6 @@ int		ft_start(t_env *e);
 void	ft_make_map(t_env *e);
 int		ft_check_next_map(t_env *e);
 int		ft_check_obj(t_env *e, int y, int x);
-int		ft_strlen_y(char **s);
 int		ft_hook_loop(t_env *e);
 int		ft_obj_animation(t_env *e);
 int		ft_check_exit(t_env *e);
@@ -131,13 +130,24 @@ void	ft_map_path(t_env *e);
 void	ft_check_map(t_env *e);
 void	ft_you_died(t_env *e);
 
+void	ft_key_act_w(t_env *e, int key);
+void	ft_key_act_s(t_env *e, int key);
+void	ft_key_act_a(t_env *e, int key);
+void	ft_key_act_d(t_env *e, int key);
+
 void	ft_check_size_map(t_env *e, int *y, int *x);
 void	ft_check_size_map2(t_env *e, int *y, int *x);
 void	ft_check_size_map3(t_env *e, int *y, int *x);
 
-int		ft_mage_move(t_env *e);
-int		ft_mage_attack(t_env *e);
-int		ft_cond_mage(t_env *e);
+//MAGE
+
+int		ft_mg_move(t_env *e);
+int		ft_mg_attack(t_env *e);
+int		ft_cond_mg(t_env *e);
+
+//ENEMY
+
+int		ft_enemy_dir(t_env *e, int j);
 
 int		ft_enemy_move_a(t_env *e, int j);
 int		ft_enemy_move_d(t_env *e, int j);
@@ -148,5 +158,8 @@ void	ft_enemy_move_atk_w(t_env *e, int j, int y, int x);
 void	ft_enemy_move_atk_s(t_env *e, int j, int y, int x);
 void	ft_enemy_move_atk_a(t_env *e, int j, int y, int x);
 void	ft_enemy_move_atk_d(t_env *e, int j, int y, int x);
+
+int		ft_strlen_gnl(char *s);
+char	**ft_get_next_matrix(t_env *e);
 
 #endif

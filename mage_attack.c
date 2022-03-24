@@ -6,13 +6,13 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:23:36 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/23 15:00:15 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 12:46:00 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_cond_mage(t_env *e)
+int	ft_cond_mg(t_env *e)
 {
 	if (e->p.atk == 1 && e->w.m[e->p.pg_y - 1][e->p.pg_x] != '1'
 			&& e->w.m[e->p.pg_y - 1][e->p.pg_x] != 'E'
@@ -40,7 +40,8 @@ int	ft_check_enm(t_env *e, int y, int x)
 	i = 0;
 	while (i < e->n.n_c)
 	{
-		if (e->w.m[y][x] == e->w.m[e->n.n_y[i]][e->n.n_x[i]] && e->n.patr[i] == 2)
+		if (e->w.m[y][x] == e->w.m[e->n.n_y[i]][e->n.n_x[i]]
+			&& e->n.patr[i] == 2)
 		{
 			e->w.m[e->n.n_y[i]][e->n.n_x[i]] = '0';
 			e->n.n_x = ft_int_trim(e->n.n_x, i, e->n.n_c);
@@ -57,7 +58,7 @@ int	ft_check_enm(t_env *e, int y, int x)
 	return (0);
 }
 
-int	ft_mage_atk_help(t_env *e, char *s, int y, int x)
+int	ft_mg_atk_b(t_env *e, char *s, int y, int x)
 {
 	ft_check_enm(e, y, x);
 	if (e->p.atk_c <= 1 || e->p.atk_c == 3 || e->p.atk_c == 8)
@@ -69,16 +70,13 @@ int	ft_mage_atk_help(t_env *e, char *s, int y, int x)
 		ft_animate_b(e, s, x, y);
 	}
 	else if (e->p.atk_c == 5 || e->p.atk_c == 6 || e->p.atk_c == 7)
-	{
-
 		ft_animate_b(e, s, x, y);
-	}
 	else if (e->p.atk_c > 9)
 		ft_animate(e, s, x, y);
 	return (0);
 }
 
-int	ft_mage_attack(t_env *e)
+int	ft_mg_attack(t_env *e)
 {
 	if (ft_delay(&e->p.d_ak, 1000) == 1)
 		return (1);
@@ -86,13 +84,13 @@ int	ft_mage_attack(t_env *e)
 	if (e->end == 0 || (e->p.atk_c > 1 && e->p.atk_c != 3 && e->p.atk_c != 8))
 	{
 		if (e->p.atk == 1)
-			ft_mage_atk_help(e, "./sprites/mage_atk/mage_atk_back", e->p.pg_y - 1, e->p.pg_x);
+			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_bk", e->p.pg_y - 1, e->p.pg_x);
 		else if (e->p.atk == 2)
-			ft_mage_atk_help(e, "./sprites/mage_atk/mage_atk_front", e->p.pg_y + 1, e->p.pg_x);
+			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_fr", e->p.pg_y + 1, e->p.pg_x);
 		else if (e->p.atk == 3)
-			ft_mage_atk_help(e, "./sprites/mage_atk/mage_atk_sx", e->p.pg_y, e->p.pg_x - 1);
+			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_sx", e->p.pg_y, e->p.pg_x - 1);
 		else if (e->p.atk == 4)
-			ft_mage_atk_help(e, "./sprites/mage_atk/mage_atk_dx", e->p.pg_y, e->p.pg_x + 1);
+			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_dx", e->p.pg_y, e->p.pg_x + 1);
 	}
 	e->p.atk_c += 1;
 	if (e->p.atk_c > 12)

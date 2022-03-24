@@ -6,7 +6,7 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/23 15:40:07 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/24 13:16:38 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC			=	so_long.c so_long_utils.c map_utils.c check.c animation.c\
 				enemy_move.c set_env.c close.c animation_utils.c myinit.c\
 				enemy_move_utils.c enemy_move_check.c enemy_attack.c\
 				map_utils2.c enemy_moveset.c enemy_attack_moveset.c\
-				pg_move.c mage_move.c mage_attack.c check_menu.c\
+				mage_move.c mage_attack.c check_menu.c check_menu2.c\
+				enemy_dir.c key_dir.c get_next_matrix.c\
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -28,7 +29,7 @@ CC			=	gcc #-fsanitize=address
 
 RM			=	rm -f
 
-CFLAGS		=	#-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror
 
 %.o:%.c
 			$(CC) $(CFLAGS) -c $< -o $@

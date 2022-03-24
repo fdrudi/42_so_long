@@ -6,20 +6,28 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 11:07:56 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 11:50:04 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_strlen_y(char **s)
+int	ft_set_av_ac(t_env *e, int argc, char **argv)
 {
 	int	i;
 
 	i = 0;
-	while (s[i])
+	e->w.ac = argc;
+	e->w.av = (char **) malloc (sizeof(char) * argc);
+	if (!e->w.av)
+		exit(1);
+	while (i < argc)
+	{
+		e->w.av[i] = ft_substr(argv[i], 0, ft_strlen(argv[i]));
 		i++;
-	return (i);
+	}
+	e->w.av[i] = 0;
+	return (0);
 }
 
 int	ft_min_nbr(int a, int b)

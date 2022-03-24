@@ -6,11 +6,11 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:13:22 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 13:02:09 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 11:41:32 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
 int	ft_strlen_gnl(char *s)
 {
@@ -46,17 +46,23 @@ char	*ft_strjoin_gnl(char *s, char c)
 	return (new);
 }
 
-char	*ft_read_line(int fd, char *dst)
+char	*ft_read_line(t_env *e, char *dst)
 {
 	int		len;
 	char	buf;
+	int		i;
 
+	i = 0;
 	len = 1;
 	while (len != 0)
 	{
-		len = read(fd, &buf, 1);
+		len = read(e->w.fd, &buf, 1);
 		if (len == -1)
 			return (NULL);
+		if (buf == '\n')
+			i = 1;
+		if (i == 0)
+			e->w.x += 1;
 		dst = ft_strjoin_gnl(dst, buf);
 	}
 	if (!dst[1])
@@ -64,20 +70,21 @@ char	*ft_read_line(int fd, char *dst)
 	return (dst);
 }
 
-char	**ft_get_next_matrix(int fd)
+char	**ft_get_next_matrix(t_env *e)
 {
 	char	**dst;
 	char	*tmp;
 
-	if (fd < 0)
+	if (e->w.fd < 0)
 		return (NULL);
 	tmp = (char *) malloc (sizeof(char) * 1);
 	if (!tmp)
 		return (NULL);
 	tmp[0] = '\0';
-	tmp = ft_read_line(fd, tmp);
+	tmp = ft_read_line(e, tmp);
 	if (!tmp)
 		return (NULL);
+	e->w.y = ft_nb_words(tmp, '\n');
 	dst = ft_split(tmp, '\n');
 	free(tmp);
 	return (dst);

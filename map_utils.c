@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/22 17:30:42 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 12:39:51 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_wall_help(t_env *e, int j, int i)
 	if ((e->w.m[i][j - 1] != '1' && e->w.m[i][j + 1] != '1' && j > 0
 		&& j < e->w.x - 1) || i == 0 || i == e->w.y -1)
 	{
-		e->path = "./sprites/wall3.xpm";
+		e->path = "./spr/wall3.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 	}
 	else
 	{
-		e->path = "./sprites/wall4.xpm";
+		e->path = "./spr/wall4.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 	}
@@ -33,7 +33,7 @@ void	ft_obj_pg(t_env *e, int j, int i)
 {
 	if (e->w.m[i][j] == 'P')
 	{
-		e->path = "./sprites/mage/mage_front0.xpm";
+		e->path = "./spr/mg/mg_front0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 		e->p.pg_x = j;
@@ -41,7 +41,7 @@ void	ft_obj_pg(t_env *e, int j, int i)
 	}
 	if (e->w.m[i][j] == 'C')
 	{
-		e->path = "./sprites/coin0.xpm";
+		e->path = "./spr/coin0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 		if (e->obj_c == 0)
@@ -62,7 +62,7 @@ void	ft_enm_ext(t_env *e, int j, int i)
 {
 	if (e->w.m[i][j] == 'E')
 	{
-		e->path = "./sprites/door0.xpm";
+		e->path = "./spr/door0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 		e->ex_x = j;
@@ -70,7 +70,7 @@ void	ft_enm_ext(t_env *e, int j, int i)
 	}
 	if (e->w.m[i][j] == 'N')
 	{
-		e->path = "./sprites/enm/enm_back0.xpm";
+		e->path = "./spr/enm/enm_back0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
 		if (e->n.n_c == 0)

@@ -6,13 +6,13 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:40:28 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/21 13:12:06 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/24 11:10:25 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	nb_words(const char *s, char c)
+int	ft_nb_words(const char *s, char c)
 {
 	int	i;
 	int	j;
@@ -65,7 +65,7 @@ char	**ft_split(const char *s, char c)
 	if (!s)
 		return (NULL);
 	len = (ft_strlen(s));
-	dest = (char **) malloc ((nb_words(s, c) + 1) * sizeof(char *));
+	dest = (char **) malloc ((ft_nb_words(s, c) + 1) * sizeof(char *));
 	if (!dest)
 		return (NULL);
 	wds_assign(s, c, dest, len);
