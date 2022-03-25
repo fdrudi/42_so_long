@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:59:52 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/25 12:03:17 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 14:02:11 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_put_floor_map(t_env *e, int x, int y)
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
 	ft_put_floor(e, x, y);
+	usleep(500);
 	return (0);
 }
 
@@ -26,6 +27,7 @@ int	ft_put_floor(t_env *e, int x, int y)
 	e->path = "./spr/w_f/floor.xpm";
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
+	usleep(500);
 	return (0);
 }
 
