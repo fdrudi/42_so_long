@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:26:26 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:46:53 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 10:26:29 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_enemy_animation(t_env *e)
 
 	j = 0;
 	if (ft_delay(&e->d4, 700) == 1)
-		return (1);
+		return (0);
 	while (j < e->n.n_c)
 	{
 		if (e->n.i[j] > 4 && e->n.patr[j] == 1)
@@ -76,7 +76,7 @@ int	ft_enemy_patrol(t_env *e)
 
 	j = 0;
 	if (ft_delay(&e->d5, 2000) == 1)
-		return (1);
+		return (0);
 	while (j < e->n.n_c)
 	{
 		if (e->n.i[j] > 4 && (e->n.patr[j] == -1 || e->n.patr[j] == 0))

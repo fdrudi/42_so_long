@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 18:39:27 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 12:23:36 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_pg
 	int		pg_y;
 	int		pg_x;
 	int		pg_c;
+	int		t_x;
+	int		t_y;
 	int		d_mg;
 	int		d_ak;
 	int		atk;
@@ -176,6 +178,6 @@ int		*ft_intjoin(int *str, int i, int size);
 char	*ft_strclean(char *str);
 int		*ft_int_trim(int *str, int pos, int size);
 int		ft_strlen_gnl(char *s);
-char	**ft_get_next_matrix(t_env *e);
+void	ft_get_next_matrix(t_env *e);
 
 #endif

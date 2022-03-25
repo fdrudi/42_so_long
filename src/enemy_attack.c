@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:48:01 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:46:37 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 10:26:18 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_enemy_attack(t_env *e)
 
 	j = 0;
 	if (ft_delay(&e->d6, 1000) == 1)
-		return (1);
+		return (0);
 	while (j < e->n.n_c)
 	{
 		e->index = e->n.i[j];

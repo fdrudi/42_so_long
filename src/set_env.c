@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:44:04 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 19:19:13 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 10:58:25 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_start_b(t_env *e)
 	e->w.y = 0;
 	e->w.x = 0;
 	e->w.fd = open(e->w.av[e->next + 1], O_RDONLY);
-	e->w.m = ft_get_next_matrix(e);
+	ft_get_next_matrix(e);
 	close(e->w.fd);
 	e->win = mlx_new_window(e->mlx, e->w.x * 64, e->w.y * 64, "Lost Dungeon");
 	if (e->win == NULL)
@@ -58,7 +58,7 @@ int	ft_start(t_env *e)
 	e->w.x = 0;
 	ft_map_path(e);
 	e->w.fd = open(e->path, O_RDONLY);
-	e->w.m = ft_get_next_matrix(e);
+	ft_get_next_matrix(e);
 	close(e->w.fd);
 	e->win = mlx_new_window(e->mlx, e->w.x * 64, e->w.y * 64, "Lost Dungeon");
 	if (e->win == NULL)
@@ -84,7 +84,7 @@ int	ft_reset_b(t_env *e)
 	e->w.y = 0;
 	e->w.x = 0;
 	e->w.fd = open(e->w.av[e->next + 1], O_RDONLY);
-	e->w.m = ft_get_next_matrix(e);
+	ft_get_next_matrix(e);
 	close(e->w.fd);
 	ft_myinit3(e);
 	ft_make_map(e);
@@ -103,7 +103,7 @@ int	ft_reset(t_env *e)
 	e->w.x = 0;
 	ft_map_path(e);
 	e->w.fd = open(e->path, O_RDONLY);
-	e->w.m = ft_get_next_matrix(e);
+	ft_get_next_matrix(e);
 	close(e->w.fd);
 	ft_myinit3(e);
 	ft_make_map(e);

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 19:11:20 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 10:27:04 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_set_av_ac(t_env *e, int argc, char **argv)
 	e->w.ac = argc;
 	e->w.av = (char **) malloc (sizeof(char) * argc);
 	if (!e->w.av)
-		exit(1);
+		ft_error(e, "error : allocation error\n");
 	while (i < argc)
 	{
 		e->w.av[i] = ft_strdup(argv[i]);

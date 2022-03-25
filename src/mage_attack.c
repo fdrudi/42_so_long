@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:23:36 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:47:12 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 12:30:43 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	ft_check_enm(t_env *e, int y, int x)
 
 int	ft_mg_atk_b(t_env *e, char *s, int y, int x)
 {
+	e->index = e->p.atk_c;
 	ft_check_enm(e, y, x);
 	if (e->p.atk_c <= 1 || e->p.atk_c == 3 || e->p.atk_c == 8)
 		ft_animate(e, s, e->p.pg_x, e->p.pg_y);
@@ -79,18 +80,22 @@ int	ft_mg_atk_b(t_env *e, char *s, int y, int x)
 int	ft_mg_attack(t_env *e)
 {
 	if (ft_delay(&e->p.d_ak, 1000) == 1)
-		return (1);
-	e->index = e->p.atk_c;
+		return (0);
+	if (e->p.pg_x != 0 && e->p.pg_y != 0)
+	{
+		e->p.t_x = e->p.pg_x;
+		e->p.t_y = e->p.pg_y;
+	}
 	if (e->end == 0 || (e->p.atk_c > 1 && e->p.atk_c != 3 && e->p.atk_c != 8))
 	{
 		if (e->p.atk == 1)
-			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_bk", e->p.pg_y - 1, e->p.pg_x);
+			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_bk", e->p.t_y - 1, e->p.t_x);
 		else if (e->p.atk == 2)
-			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_fr", e->p.pg_y + 1, e->p.pg_x);
+			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_fr", e->p.t_y + 1, e->p.t_x);
 		else if (e->p.atk == 3)
-			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_sx", e->p.pg_y, e->p.pg_x - 1);
+			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_sx", e->p.t_y, e->p.t_x - 1);
 		else if (e->p.atk == 4)
-			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_dx", e->p.pg_y, e->p.pg_x + 1);
+			ft_mg_atk_b(e, "./spr/mg_atk/mg_atk_dx", e->p.t_y, e->p.t_x + 1);
 	}
 	e->p.atk_c += 1;
 	if (e->p.atk_c > 12)

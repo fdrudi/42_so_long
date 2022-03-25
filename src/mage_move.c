@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:03:10 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:47:14 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 10:26:44 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_fade(t_env *e)
 
 	e->end = -1;
 	if (ft_delay(&e->d3, 1000) == 1)
-		return (1);
+		return (0);
 	if (i < 8)
 	{
 		e->index = i;
@@ -81,7 +81,7 @@ int	ft_mg_move(t_env *e)
 	if (e->p.pg_c > 5)
 		e->p.pg_c = 1;
 	if (e->p.pg_c > 1 && ft_delay(&e->p.d_mg, 500) == 1)
-		return (1);
+		return (0);
 	e->index = e->p.pg_c;
 	if (e->p.pg_c == 5)
 		e->index = 0;

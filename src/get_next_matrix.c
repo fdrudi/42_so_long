@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:13:22 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 19:19:30 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 11:00:27 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_read_line(t_env *e, char *dst)
 	{
 		len = read(e->w.fd, &buf, 1);
 		if (len == -1)
-			return (NULL);
+			ft_error(e, "error : read error\n");
 		if (buf == '\n')
 			i = 1;
 		if (i == 0)
@@ -70,22 +70,21 @@ char	*ft_read_line(t_env *e, char *dst)
 	return (dst);
 }
 
-char	**ft_get_next_matrix(t_env *e)
+void	ft_get_next_matrix(t_env *e)
 {
-	char	**dst;
 	char	*tmp;
 
 	if (e->w.fd < 0)
-		return (NULL);
+		ft_error(e, "error : invalid map\n");
 	tmp = (char *) malloc (sizeof(char) * 1);
 	if (!tmp)
-		return (NULL);
+		ft_error(e, "error : allocation error\n");
 	tmp[0] = '\0';
 	tmp = ft_read_line(e, tmp);
 	if (!tmp)
-		return (NULL);
+		ft_error(e, "error : allocation error\n");
 	e->w.y = ft_nb_words(tmp, '\n');
-	dst = ft_split(tmp, '\n');
+	e->w.m = ft_split(tmp, '\n');
 	free(tmp);
-	return (dst);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:59:52 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:48:20 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 12:03:17 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ int	ft_check_exit(t_env *e)
 	static int	i;
 
 	if (ft_delay(&e->d2, 1000) == 1)
-	{
 		return (0);
-	}
 	if (i < 4)
 	{
 		e->index = i;

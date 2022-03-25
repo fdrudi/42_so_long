@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:46:13 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 10:26:12 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_obj_animation(t_env *e)
 	if (i > 5)
 		i = 0;
 	if (ft_delay(&e->d, 1000) == 1)
-		return (1);
+		return (0);
 	while (j < e->obj_c)
 	{
 		e->index = i;

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:39:57 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:46:32 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/25 12:37:34 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_enemy_move_atk_a(t_env *e, int j, int y, int x)
 {
+	if (e->w.m[e->n.n_y[j]][e->n.n_x[j]] == 'P')
+		ft_you_died(e);
 	if (e->n.x_m[j] == -1)
 	{
 		ft_animate(e, "./spr/enm/atk/enm_atk_sx", x + 1, y);
@@ -36,13 +38,13 @@ void	ft_enemy_move_atk_a(t_env *e, int j, int y, int x)
 			e->index = e->n.i[j];
 			ft_animate(e, "./spr/enm/atk/enm_atk_sx", x, y);
 		}
-		return ;
 	}
-	return ;
 }
 
 void	ft_enemy_move_atk_d(t_env *e, int j, int y, int x)
 {
+	if (e->w.m[e->n.n_y[j]][e->n.n_x[j]] == 'P')
+		ft_you_died(e);
 	if (e->n.x_m[j] == 1)
 	{
 		ft_animate(e, "./spr/enm/atk/enm_atk_dx", x - 1, y);
@@ -65,13 +67,13 @@ void	ft_enemy_move_atk_d(t_env *e, int j, int y, int x)
 			e->index = e->n.i[j];
 			ft_animate(e, "./spr/enm/atk/enm_atk_dx", x, y);
 		}
-		return ;
 	}
-	return ;
 }
 
 void	ft_enemy_move_atk_w(t_env *e, int j, int y, int x)
 {
+	if (e->w.m[e->n.n_y[j]][e->n.n_x[j]] == 'P')
+		ft_you_died(e);
 	if (e->n.y_m[j] == -1)
 	{
 		ft_animate(e, "./spr/enm/atk/enm_atk_back", x, y + 1);
@@ -94,13 +96,13 @@ void	ft_enemy_move_atk_w(t_env *e, int j, int y, int x)
 			e->index = e->n.i[j];
 			ft_animate(e, "./spr/enm/atk/enm_atk_back", x, y);
 		}
-		return ;
 	}
-	return ;
 }
 
 void	ft_enemy_move_atk_s(t_env *e, int j, int y, int x)
 {
+	if (e->w.m[e->n.n_y[j]][e->n.n_x[j]] == 'P')
+		ft_you_died(e);
 	if (e->n.y_m[j] == 1)
 	{
 		ft_animate(e, "./spr/enm/atk/enm_atk_front", x, y - 1);
@@ -123,7 +125,5 @@ void	ft_enemy_move_atk_s(t_env *e, int j, int y, int x)
 			e->index = e->n.i[j];
 			ft_animate(e, "./spr/enm/atk/enm_atk_front", x, y);
 		}
-		return ;
 	}
-	return ;
 }
