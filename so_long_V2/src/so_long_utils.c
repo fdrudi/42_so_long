@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/25 10:27:04 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/26 18:50:13 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_set_av_ac(t_env *e, int argc, char **argv)
 		e->w.av[i] = ft_strdup(argv[i]);
 		i++;
 	}
-	e->w.av[i] = 0;
+	e->w.av[i] = NULL;
 	return (0);
 }
 

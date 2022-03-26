@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:34:58 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 12:42:34 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/26 18:41:16 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	ft_myinit2(t_env *e)
 {
 	int	i;
 
-	e->n.x_m = (int *) malloc (sizeof(int) * e->n.n_c - 1);
-	e->n.y_m = (int *) malloc (sizeof(int) * e->n.n_c - 1);
-	e->n.patr = (int *) malloc (sizeof(int) * e->n.n_c - 1);
-	e->n.i = (int *) malloc (sizeof(int) * e->n.n_c - 1);
+	e->n.x_m = (int *) malloc (sizeof(int) * e->n.n_c);
+	e->n.y_m = (int *) malloc (sizeof(int) * e->n.n_c);
+	e->n.patr = (int *) malloc (sizeof(int) * e->n.n_c);
+	e->n.i = (int *) malloc (sizeof(int) * e->n.n_c);
 	if (!e->n.patr || !e->n.i || !e->n.x_m || !e->n.y_m)
 		ft_error(e, "error : allocation error\n");
 	i = -1;
