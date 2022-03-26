@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:22:14 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 11:47:54 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/26 12:41:57 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_key_act_w(t_env *e, int key)
 		else if (e->lst_key == -1 && e->end == 0)
 		{
 			e->p.atk = 1;
-			// e->index = 0;
 			ft_animate_mg_dir(e, "./spr/mg/mg_back", e->p.pg_x, e->p.pg_y, 0);
 		}
 	}
@@ -59,7 +58,6 @@ void	ft_key_act_s(t_env *e, int key)
 		else if (e->lst_key == -1 && e->end == 0)
 		{
 			e->p.atk = 2;
-			// e->index = 0;
 			ft_animate_mg_dir(e, "./spr/mg/mg_front", e->p.pg_x, e->p.pg_y, 0);
 		}
 	}
@@ -76,7 +74,6 @@ void	ft_key_act_a(t_env *e, int key)
 		else if (e->lst_key == -1 && e->end == 0)
 		{
 			e->p.atk = 3;
-			// e->index = 0;
 			ft_animate_mg_dir(e, "./spr/mg/mg_sx", e->p.pg_x, e->p.pg_y, 0);
 		}
 	}
@@ -93,7 +90,6 @@ void	ft_key_act_d(t_env *e, int key)
 		else if (e->lst_key == -1 && e->end == 0)
 		{
 			e->p.atk = 4;
-			// e->index = 0;
 			ft_animate_mg_dir(e, "./spr/mg/mg_dx", e->p.pg_x, e->p.pg_y, 0);
 		}
 	}

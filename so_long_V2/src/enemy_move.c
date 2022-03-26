@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:26:26 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 11:28:49 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/26 12:42:28 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	ft_enemy_animation(t_env *e)
 	{
 		if (e->n.i[j] > 4 && e->n.patr[j] == 1)
 			e->n.i[j] = 0;
-		// e->index = e->n.i[j];
 		if (e->w.m[e->n.n_y[j]][e->n.n_x[j]] == 'P' && e->p.pg_c == 5)
 			ft_you_died(e);
 		if (e->n.i[j] == 1 && e->n.patr[j] == 1)
@@ -83,7 +82,6 @@ int	ft_enemy_patrol(t_env *e)
 	{
 		if (e->n.i[j] > 4 && (e->n.patr[j] == -1 || e->n.patr[j] == 0))
 			e->n.i[j] = 0;
-		// e->index = e->n.i[j];
 		if (e->w.m[e->n.n_y[j]][e->n.n_x[j]] == 'P' && e->p.pg_c == 5)
 			ft_you_died(e);
 		ft_check_pg(e, j);

@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:48:01 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 11:24:01 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/26 12:42:06 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	ft_enemy_attack(t_env *e)
 		return (0);
 	while (j < e->n.n_c)
 	{
-		// e->index = e->n.i[j];
 		if (e->n.patr[j] == 2)
 		{
 			ft_enemy_dir_atk(e, j);

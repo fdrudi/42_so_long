@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 12:23:12 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/26 12:41:10 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_env
 	int		d4;
 	int		d5;
 	int		d6;
-	// int		index;
 	int		mv;
 	int		i_x;
 	int		i_y;
