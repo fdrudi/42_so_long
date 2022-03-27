@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:08 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 17:12:31 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 17:42:59 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	ft_check_next_map(t_env *e)
 		e->path = ft_strjoin(s1, ".ber");
 		free(s1);
 		fd = open(e->path, O_RDONLY);
+		free(e->path);
 	}
 	else if (e->next + 2 < e->w.ac)
 		fd = open(e->w.av[e->next + 2], O_RDONLY);
