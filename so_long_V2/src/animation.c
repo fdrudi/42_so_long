@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 17:16:37 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 17:19:34 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_animate_b(t_env *e, char *s2, int x, int y, int index)
 	free(s1);
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
-	// usleep(100);
 	return (0);
 }
 
@@ -41,7 +40,6 @@ int	ft_animate(t_env *e, char *s2, int x, int y, int index)
 	free(s1);
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
-	// usleep(100);
 	return (0);
 }
 

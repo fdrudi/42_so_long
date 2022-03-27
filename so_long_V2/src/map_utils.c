@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 17:17:27 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 17:18:52 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ void	ft_wall_help(t_env *e, int j, int i)
 		e->path = "./spr/w_f/wall3.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
-		// usleep(100);
 	}
 	else
 	{
 		e->path = "./spr/w_f/wall4.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
-		// usleep(100);
 	}
 }
 
@@ -40,7 +38,6 @@ void	ft_obj_pg(t_env *e, int j, int i)
 		e->path = "./spr/mg/mg_front0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
-		// usleep(100);
 		e->p.pg_x = j;
 		e->p.pg_y = i;
 	}
@@ -49,7 +46,6 @@ void	ft_obj_pg(t_env *e, int j, int i)
 		e->path = "./spr/obj/coin0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
-		// usleep(100);
 		e->obj_x[a] = j;
 		e->obj_y[a] = i;
 		a++;
@@ -67,7 +63,6 @@ void	ft_enm_ext(t_env *e, int j, int i)
 		e->path = "./spr/door/door0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
-		// usleep(100);
 		e->ex_x = j;
 		e->ex_y = i;
 	}
@@ -76,7 +71,6 @@ void	ft_enm_ext(t_env *e, int j, int i)
 		e->path = "./spr/enm/enm_back0.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 		mlx_put_image_to_window(e->mlx, e->win, e->img, j * 64, i * 64);
-		// usleep(100);
 		e->n.n_x[a] = j;
 		e->n.n_y[a] = i;
 		a++;
