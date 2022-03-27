@@ -6,7 +6,7 @@
 #    By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 14:57:20 by fdrudi            #+#    #+#              #
-#    Updated: 2022/03/26 18:50:55 by fdrudi           ###   ########.fr        #
+#    Updated: 2022/03/27 11:54:36 by fdrudi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ MLX			=	./libmlx.dylib
 
 LIBFT		=	libft/libft.a
 
-CC			=	gcc
+CC			=	gcc -fsanitize=address
 
 RM			=	rm -f
 

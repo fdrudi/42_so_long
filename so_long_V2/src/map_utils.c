@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:08:03 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 10:46:42 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 11:23:13 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_wall_help(t_env *e, int j, int i)
 {
-	if ((e->w.m[i][j - 1] != '1' && e->w.m[i][j + 1] != '1' && j > 0
-		&& j < e->w.x - 1) || i == 0 || i == e->w.y -1)
+	if ((j > 0 && j < e->w.x - 1 && e->w.m[i][j - 1] != '1'
+		&& e->w.m[i][j + 1] != '1') || i == 0 || i == e->w.y -1)
 	{
 		e->path = "./spr/w_f/wall3.xpm";
 		e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);

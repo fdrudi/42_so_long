@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:34:58 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 18:41:16 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 11:18:57 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ void	ft_map_path(t_env *e)
 	c = ft_itoa(e->next);
 	s1 = ft_strjoin("./map/map", c);
 	free(c);
-	e->path = s1;
+	e->path = ft_strjoin(s1, ".ber");
 	free(s1);
-	s1 = ft_strjoin(e->path, ".ber");
-	e->path = s1;
-	free(s1);
+
 }
 
 void	ft_myinit(t_env *e)
@@ -61,7 +59,7 @@ void	ft_myinit2(t_env *e)
 	if (!e->n.patr || !e->n.i || !e->n.x_m || !e->n.y_m)
 		ft_error(e, "error : allocation error\n");
 	i = -1;
-	while (++i <= e->n.n_c)
+	while (++i < e->n.n_c)
 	{
 		e->n.patr[i] = 0;
 		e->n.i[i] = 0;

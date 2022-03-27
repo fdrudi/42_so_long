@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:40:28 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 11:10:25 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 10:37:11 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_nb_words(const char *s, char c)
 	return (i);
 }
 
-static char	**wds_assign(const char *s, char c, char **dest, size_t len)
+void	wds_assign(const char *s, char c, char **dest, size_t len)
 {
 	size_t	i;
 	size_t	x;
@@ -54,7 +54,7 @@ static char	**wds_assign(const char *s, char c, char **dest, size_t len)
 		i++;
 	}
 	dest[x] = 0;
-	return (dest);
+	return ;
 }
 
 char	**ft_split(const char *s, char c)

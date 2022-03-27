@@ -6,11 +6,32 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:05:49 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/24 15:47:25 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 11:03:47 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+void	ft_print_map(t_env *e)
+{
+	int	y = 0;
+	int	x = 0;
+
+	while (y < e->w.y)
+	{
+		x = 0;
+		while (x < e->w.x)
+		{
+			printf("%c", e->w.m[y][x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+	printf("\n");
+	printf("\n");
+	printf("\n");
+}
 
 void	ft_check_map2(t_env *e)
 {

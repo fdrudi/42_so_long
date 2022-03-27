@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 18:50:13 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 11:24:05 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	*ft_intjoin(int *str, int new, int size)
 		i++;
 	}
 	dst[i] = new;
+	// dst[++i] = 0;
 	free(str);
 	return (dst);
 }
