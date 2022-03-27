@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 12:48:32 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 17:09:25 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_set_av_ac(t_env *e, int argc, char **argv)
 
 	i = 0;
 	e->w.ac = argc;
-	e->w.av = (char **) malloc (sizeof(char) * argc);
+	e->w.av = (char **) malloc (sizeof(char *) * argc);
 	if (!e->w.av)
 		ft_error(e, "error : allocation error\n");
 	while (i < argc)
@@ -26,7 +26,6 @@ int	ft_set_av_ac(t_env *e, int argc, char **argv)
 		e->w.av[i] = ft_strdup(argv[i]);
 		i++;
 	}
-	e->w.av[i] = NULL;
 	return (0);
 }
 
@@ -40,37 +39,6 @@ int	ft_min_nbr(int a, int b)
 		return (b);
 	else
 		return (a);
-}
-
-int	*ft_intjoin_help(int *str, int new, int size)
-{
-	int	*dst;
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	dst = (int *) malloc (sizeof(int) * size + 1);
-	if (!dst)
-		return (0);
-	while (i < size)
-	{
-		dst[i] = str[i];
-		i++;
-	}
-	dst[i] = new;
-	// dst[++i] = 0;
-	// free(str);
-	return (dst);
-}
-
-int	*ft_intjoin(int *str, int new, int size)
-{
-	int	*dst;
-
-	dst = ft_intjoin_help(str, new, size);
-	free(str);
-	return (dst);
 }
 
 char	*ft_strclean(char *str)

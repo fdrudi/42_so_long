@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:59:52 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 12:17:51 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 17:16:30 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_put_floor_map(t_env *e, int x, int y)
 	e->path = "./spr/w_f/floor_map.xpm";
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
-	ft_put_floor(e, x, y);
 	usleep(100);
+	ft_put_floor(e, x, y);
 	return (0);
 }
 
@@ -53,7 +53,7 @@ int	ft_move_count(t_env *e, t_win *m)
 	c = ft_itoa(e->mv);
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, (m->x - 1) * 64, 0);
-	usleep(100);
+	// usleep(100);
 	mlx_string_put(e->mlx, e->win, x, 30, 0xFF00, c);
 	free(c);
 	return (0);

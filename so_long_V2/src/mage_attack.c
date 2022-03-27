@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:23:36 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 11:52:27 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 17:17:03 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_animate_mg_atk(t_env *e, char *s2, int x, int y, int index)
 	free(s1);
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
-	usleep(100);
+	// usleep(100);
 	return (0);
 }
 
@@ -41,7 +41,7 @@ int	ft_animate_mg_b(t_env *e, char *s2, int x, int y, int index)
 	free(s1);
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x * 64, y * 64);
-	usleep(100);
+	// usleep(100);
 	return (0);
 }
 
@@ -93,7 +93,8 @@ int	ft_check_enm(t_env *e, int y, int x)
 
 int	ft_mg_atk_b(t_env *e, char *s, int y, int x)
 {
-	ft_check_enm(e, y, x);
+	if (e->p.atk_c < 10)
+		ft_check_enm(e, y, x);
 	if (e->p.atk_c <= 1 || e->p.atk_c == 3 || e->p.atk_c == 8)
 		ft_animate_mg_atk(e, s, e->p.pg_x, e->p.pg_y, e->p.atk_c);
 	if (e->p.atk_c == 1 || e->p.atk_c == 3 || e->p.atk_c == 8)

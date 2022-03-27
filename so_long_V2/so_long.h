@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 12:45:36 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 16:20:00 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		ft_endgame(t_env *e);
 int		ft_next_level(t_env *e);
 int		ft_check_exit(t_env *e);
 void	ft_exit(t_env *e);
-void	ft_free_matrix(char **matrix, int y);
+void	ft_free_matrix(t_env *e);
 int		ft_close_win(t_env *e);
 void	ft_error(t_env *e, char *s);
 
@@ -125,6 +125,7 @@ void	ft_check_map(t_env *e);
 void	ft_check_size_map(t_env *e, int *y, int *x);
 void	ft_check_size_map2(t_env *e, int *y, int *x);
 void	ft_check_size_map3(t_env *e, int *y, int *x);
+void	ft_print_map(t_env *e);
 
 // ANIMATIONS
 

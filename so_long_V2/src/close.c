@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:45:56 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 10:46:26 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 17:16:42 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_you_died(t_env *e)
 	ft_check_size_map3(e, &y, &x);
 	e->img = mlx_xpm_file_to_image(e->mlx, e->path, &e->i_x, &e->i_y);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, x, y);
-	usleep(100);
+	// usleep(100);
 }
 
 int	ft_close_win(t_env *e)
@@ -51,22 +51,22 @@ int	ft_close_win(t_env *e)
 	return (0);
 }
 
-void	ft_free_matrix(char **matrix, int y)
+void	ft_free_matrix(t_env *e)
 {
 	int	i;
 
 	i = 0;
-	while (i < y)
+	while (i < e->w.y)
 	{
-		free(matrix[i]);
+		free(e->w.m[i]);
 		i++;
 	}
-	free(matrix);
+	free(e->w.m);
 }
 
 void	ft_exit(t_env *e)
 {
-	ft_free_matrix(e->w.m, e->w.y);
+	ft_free_matrix(e);
 	free(e->obj_x);
 	free(e->obj_y);
 	free(e->n.n_x);
