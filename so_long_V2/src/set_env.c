@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:44:04 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 11:03:19 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 13:16:58 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	ft_start_b(t_env *e)
 		free(e->win);
 		ft_error(e, "error : allocation error\n");
 	}
-	ft_myinit3(e);
 	ft_make_map(e);
 	if (e->n.n_c > 0)
 		ft_myinit2(e);
@@ -66,7 +65,6 @@ int	ft_start(t_env *e)
 		free(e->win);
 		ft_error(e, "error : allocation error\n");
 	}
-	ft_myinit3(e);
 	ft_make_map(e);
 	if (e->n.n_c > 0)
 		ft_myinit2(e);
@@ -86,7 +84,6 @@ int	ft_reset_b(t_env *e)
 	e->w.fd = open(e->w.av[e->next + 1], O_RDONLY);
 	ft_get_next_matrix(e);
 	close(e->w.fd);
-	ft_myinit3(e);
 	ft_make_map(e);
 	if (e->n.n_c > 0)
 		ft_myinit2(e);
@@ -105,7 +102,6 @@ int	ft_reset(t_env *e)
 	e->w.fd = open(e->path, O_RDONLY);
 	ft_get_next_matrix(e);
 	close(e->w.fd);
-	ft_myinit3(e);
 	ft_make_map(e);
 	if (e->n.n_c > 0)
 		ft_myinit2(e);

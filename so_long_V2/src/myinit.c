@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:34:58 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 11:18:57 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 13:10:43 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_map_path(t_env *e)
 	free(c);
 	e->path = ft_strjoin(s1, ".ber");
 	free(s1);
-
 }
 
 void	ft_myinit(t_env *e)
@@ -68,10 +67,10 @@ void	ft_myinit2(t_env *e)
 
 void	ft_myinit3(t_env *e)
 {
-	e->obj_x = (int *) malloc (sizeof(int) * 1);
-	e->obj_y = (int *) malloc (sizeof(int) * 1);
-	e->n.n_x = (int *) malloc (sizeof(int) * 1);
-	e->n.n_y = (int *) malloc (sizeof(int) * 1);
+	e->obj_x = (int *) malloc (sizeof(int) * e->obj_c);
+	e->obj_y = (int *) malloc (sizeof(int) * e->obj_c);
+	e->n.n_x = (int *) malloc (sizeof(int) * e->n.n_c);
+	e->n.n_y = (int *) malloc (sizeof(int) * e->n.n_c);
 	if (!e->obj_x || !e->obj_y || !e->n.n_x || !e->n.n_y)
 		ft_error(e, "error : allocation error\n");
 }

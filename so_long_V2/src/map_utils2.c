@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:05:49 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 11:03:47 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 12:55:30 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 void	ft_print_map(t_env *e)
 {
-	int	y = 0;
-	int	x = 0;
+	int	y;
+	int	x;
 
+	x = 0;
+	y = 0;
 	while (y < e->w.y)
 	{
 		x = 0;
 		while (x < e->w.x)
 		{
-			printf("%c", e->w.m[y][x]);
+			write(1, &e->w.m[y][x], 1);
 			x++;
 		}
-		printf("\n");
+		write(1, "\n", 1);
 		y++;
 	}
-	printf("\n");
-	printf("\n");
-	printf("\n");
+	write(1, "\n", 1);
+	write(1, "\n", 1);
+	write(1, "\n", 1);
 }
 
 void	ft_check_map2(t_env *e)
@@ -72,15 +74,15 @@ void	ft_check_map(t_env *e)
 				&& e->w.m[i][j] != '1')
 				ft_error(e, "error : invalid map (wall incomplete)\n");
 			else if (e->w.m[i][j] == 'C')
-				e->obj_c = 1;
+				e->obj_c += 1;
 			else if (e->w.m[i][j] == 'E')
 				e->ex_x = 1;
 			else if (e->w.m[i][j] == 'P')
 				e->p.pg_x = 1;
+			else if (e->w.m[i][j] == 'N')
+				e->n.n_c += 1;
 		}
 	}
-	if (e->ex_x != 1 || e->obj_c != 1 || e->p.pg_x != 1)
+	if (e->ex_x != 1 || e->obj_c < 1 || e->p.pg_x != 1)
 		ft_error(e, "error : invalid map (missing set)\n");
-	else
-		ft_myinit(e);
 }

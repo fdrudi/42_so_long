@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:03:42 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 12:41:10 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 12:45:36 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_env
 	void	*win;
 	void	*img;
 	char	*path;
+	int		*x;
+	int		*y;
 	int		end;
 	int		next;
 	int		lst_key;

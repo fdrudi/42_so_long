@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 17:50:34 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 11:24:05 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 12:48:32 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_min_nbr(int a, int b)
 		return (a);
 }
 
-int	*ft_intjoin(int *str, int new, int size)
+int	*ft_intjoin_help(int *str, int new, int size)
 {
 	int	*dst;
 	int	i;
@@ -60,6 +60,15 @@ int	*ft_intjoin(int *str, int new, int size)
 	}
 	dst[i] = new;
 	// dst[++i] = 0;
+	// free(str);
+	return (dst);
+}
+
+int	*ft_intjoin(int *str, int new, int size)
+{
+	int	*dst;
+
+	dst = ft_intjoin_help(str, new, size);
 	free(str);
 	return (dst);
 }

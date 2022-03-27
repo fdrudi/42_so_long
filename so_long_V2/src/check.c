@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:08 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/26 12:21:39 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 12:03:47 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,10 @@ int	ft_check_next_map(t_env *e)
 	fd = 0;
 	if (e->w.ac == 1)
 	{
-		c = ft_itoa(e->next + 1);
+		c = ft_itoa(e->next);
 		s1 = ft_strjoin("./map/map", c);
 		free(c);
-		e->path = s1;
-		free(s1);
-		s1 = ft_strjoin(e->path, ".ber");
-		e->path = s1;
+		e->path = ft_strjoin(s1, ".ber");
 		free(s1);
 		fd = open(e->path, O_RDONLY);
 	}

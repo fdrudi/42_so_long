@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:23:40 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 11:53:33 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/27 13:06:30 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_animate(t_env *e, char *s2, int x, int y, int index)
 {
 	char	*s1;
 	char	*c;
-
 
 	ft_put_floor(e, x, y);
 	c = ft_itoa(index);
