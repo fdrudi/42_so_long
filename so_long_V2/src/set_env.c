@@ -6,7 +6,7 @@
 /*   By: fdrudi <fdrudi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 19:44:04 by fdrudi            #+#    #+#             */
-/*   Updated: 2022/03/27 17:51:39 by fdrudi           ###   ########.fr       */
+/*   Updated: 2022/03/28 12:18:18 by fdrudi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_start_b(t_env *e)
 	e->w.fd = open(e->w.av[e->next + 1], O_RDONLY);
 	ft_get_next_matrix(e);
 	close(e->w.fd);
-	free(e->path);
 	e->win = mlx_new_window(e->mlx, e->w.x * 64, e->w.y * 64, "Lost Dungeon");
 	if (e->win == NULL)
 	{
@@ -86,7 +85,6 @@ int	ft_reset_b(t_env *e)
 	e->w.fd = open(e->w.av[e->next + 1], O_RDONLY);
 	ft_get_next_matrix(e);
 	close(e->w.fd);
-	free(e->path);
 	ft_make_map(e);
 	if (e->n.n_c > 0)
 		ft_myinit2(e);
